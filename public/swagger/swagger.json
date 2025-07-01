@@ -1,0 +1,471 @@
+{
+  "openapi": "3.0.0",
+
+    "info": {
+      "title": "Minha API",
+      "version": "1.0.0"
+    },
+
+    "tags": [
+    {
+      "name": "Usuários",
+      "description": "Processos vinculados aos usuários"
+    } ,
+
+    {
+      "name": "Postagens",
+      "description": "Processos vinculados aos usuários"
+    } ,
+
+    {
+      "name": "Comentarios",
+      "description": "Processos vinculados aos usuários"
+    } 
+  ],
+
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    },
+  
+  "paths" : {
+    #// ---------------------------------------------------------------
+
+     "/user/login" : {
+      "post": {
+         "tags": ["Usuários"],
+        "summary": "Endpoint de login ",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": { "type": "string" },
+                  "pass": { "type": "string" }
+                },
+                "required": ["user", "pass"]
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Login bem-sucedido ",
+            "data" : "teste"
+          },
+          "401": {
+            "description": "Falha na autenticação"
+          }
+        }
+
+      }
+    } ,
+
+    #// ---------------------------------------------------------------
+
+     "/user/newUser" : {
+
+      "post": {
+         "tags": ["Usuários"],
+        "summary": "Adicionar novos acessos",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf": { "type": "string" },
+                  "nome": { "type": "string" },
+                  "email": { "type": "string" },
+                  "telefone": { "type": "string" },
+                  "sexo": { "type": "string" },
+                  "funcao_na_empresa": { "type": "string" },
+                  "senha": { "type": "string" }
+                },
+                "required": ["cpf","nome","email","telefone","sexo","funcao_na_empresa","senha"]
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Acesso criado com sucesso"
+          },
+          "401": {
+            "description": "Erro na execução do processo"
+          }
+        }
+      }
+
+    } , 
+    
+    #// ---------------------------------------------------------------
+
+    "/user/update/selfPerfil" : {
+
+      "patch": {
+         "tags": ["Usuários"],
+         "description" : "Será possivel editar apenas os campos :   sexo , email , telefone e funcao_na_empresa" ,
+        "summary": "Atualizar dados de perfil do usuário",
+        #// -------------- AUTH
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        #// --------------
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "campo": { "type": "string" },
+                  "dados": { "type": "string" }
+                },
+                "required": ["campo","novoDados"]
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Acesso criado com sucesso"
+          },
+          "401": {
+            "description": "Erro na execução do processo"
+          }
+        }
+      }
+
+    } , 
+    
+    #// ---------------------------------------------------------------
+
+    "/user/update/selfPass" : {
+
+      "patch": {
+         "tags": ["Usuários"],
+         "description" : "Troca de senha" ,
+        "summary": "Rota possibilita o proprio usuário editar sua senha",
+        #// -------------- AUTH
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        #// --------------
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pass": { "type": "string" },
+                },
+                "required": ["pass"]
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Processo realizado"
+          },
+          "401": {
+            "description": "Erro na execução do processo"
+          }
+        }
+      }
+
+    } , 
+
+    #// ---------------------------------------------------------------
+
+    "/user/list/self": {
+      "get": {
+        "tags": ["Usuários"],
+        "summary": "Listar dados do usuário autenticado",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dados do usuário retornados com sucesso"
+          },
+          "400": {
+            "description": "Requisição malformada ou token inválido"
+          },
+          "401": {
+            "description": "Token ausente ou inválido"
+          }
+        }
+      }
+    }, 
+
+    #// ---------------------------------------------------------------
+
+    "/user/add/newPostComentario": {
+      "post": {
+        "tags": ["Usuários"],
+        "summary": "Para o usuário adicionar novos postes",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+
+                  "legenda": { 
+                    "type": "string",
+                    "description": "Texto da legenda"
+                  }
+
+                },
+                "required": ["legenda"]
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Postagem criada com sucesso"
+          },
+          "400": {
+            "description": "Requisição malformada ou campos ausentes"
+          },
+          "401": {
+            "description": "Token ausente ou inválido"
+          }
+        }
+      }
+    }, 
+
+    #// ---------------------------------------------------------------
+
+
+    "/user/add/newPostFile": {
+      "post": {
+        "tags": ["Usuários"],
+        "summary": "Para o usuário adicionar novos postes com arquivos",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+
+                  "legenda": {
+                    "type": "string",
+                    "description": "Texto da legenda"
+                  },
+
+                  "arquivo": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Arquivo que será enviado"
+                  }
+
+                },
+                "required": [
+                  "legenda",
+                  "arquivo"
+                ]
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Postagem criada com sucesso"
+          },
+          "400": {
+            "description": "Requisição malformada ou campos ausentes"
+          },
+          "401": {
+            "description": "Token ausente ou inválido"
+          }
+        }
+      }
+    },
+
+
+    #// ---------------------------------------------------------------
+
+    "/postes/view/all": {
+      "get": {
+        "tags": ["Postagens"],
+        "summary": "ver todas as postagens",
+        
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Postagem criada com sucesso"
+          },
+          "400": {
+            "description": "Requisição malformada ou campos ausentes"
+          },
+          "401": {
+            "description": "Token ausente ou inválido"
+          }
+        }
+      }
+    }, 
+    
+    #// ---------------------------------------------------------------
+
+    "/postes/view/limit": {
+      "get": {
+        "tags": ["Postagens"],
+        "summary": "Lista todas postagens do usuário com limite",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Número máximo de postagens a retornar"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Lista de postagens retornada com sucesso"
+          },
+          "401": {
+            "description": "Token inválido ou ausente"
+          },
+          "400": {
+            "description": "Parâmetro limit ausente ou inválido"
+          }
+        }
+      }
+    },
+    
+    #// ---------------------------------------------------------------
+
+    "/usuarios/list/onlyUsers": {
+      "get": {
+        "tags": ["Usuários"],
+        "summary": "Lista todas postagens do usuário com limite",
+
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "id do usuario especifico"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Lista de postagens retornada com sucesso"
+          },
+          "401": {
+            "description": "Token inválido ou ausente"
+          },
+          "400": {
+            "description": "Parâmetro limit ausente ou inválido"
+          }
+        }
+      }
+    },
+    
+    #// ---------------------------------------------------------------7
+
+ 
+    "/postes/view/down/file": {
+      "get": {
+        "tags": ["Postagens"],
+        "summary": "--------",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Número máximo de postagens a retornar"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Lista de postagens retornada com sucesso"
+          },
+          "401": {
+            "description": "Token inválido ou ausente"
+          },
+          "400": {
+            "description": "Parâmetro limit ausente ou inválido"
+          }
+        }
+      }
+    },
+
+
+  }
+}
