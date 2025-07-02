@@ -4,10 +4,9 @@ Sou estudante de Sistemas de Informação e desenvolvedor em formação, com pro
 Atualmente estudo e crio projetos com intenção aplicar meus conhecimentos passados ao longo de minha experiência academica e no mercado de trabalho
 📫 Você consegue chegar até mim através do email samuelsouto21@gmail.com .
 
-
+---
 # Projeto backend de uma simples rede social criada em PHP
  
-
 Esté é um projeto integrado que reúne diversas APIs úteis desenvolvido com o serviço node.js atraves de apis que desenvolvidas e aplicadas em trabalhos freelance. O objetivo foi centralizar e facilitar a comunicação com serviços externos por meio de uma estrutura em Node.js.
 
 Serviços integrados:
@@ -16,6 +15,9 @@ Serviços integrados:
 
 API RESTful em PHP orientada a objetos, projetada para servir postagens com upload e download de arquivos.  
 Deploy simplificado via Render, com autenticação JWT e documentação Swagger integrada.
+
+#Regra de negocio 
+
 
 ---
 
@@ -39,7 +41,9 @@ Deploy simplificado via Render, com autenticação JWT e documentação Swagger 
 
 ## Estrutura do Projeto
 
-		 
+
+
+---	 
 
 		├── config
 		│   └── conexaoDB.php
@@ -102,17 +106,49 @@ Deploy simplificado via Render, com autenticação JWT e documentação Swagger 
 
 ## Configuração do Ambiente
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/seu-projeto.git
-   cd seu-projeto
+Configure variáveis de ambiente para conexão com o banco Postgres.
+Exemplo .env:
+---
+	1. Clone o repositório:
+	   ```bash
+	   git clone https://github.com/seu-usuario/seu-projeto.git
+	   cd seu-projeto
+---	   
 
-DB_NAME=seubanco
-DB_USER=usuario
-DB_PASS=senha
-DB_HOST=localhost
-DB_PORT=5432
-JWT_SECRET=sua_chave_secreta_jwt
+Configure variáveis de ambiente para conexão com o banco Postgres.
+Exemplo .env:
+---
+	DB_NAME=seubanco
+	DB_USER=usuario
+	DB_PASS=senha
+	DB_HOST=localhost
+	DB_PORT=5432
+	JWT_SECRET=sua_chave_secreta_jwt
+
+---
+
+- Variáveis de Ambiente
+
+	| Variável    | Descrição                     |
+	| ----------- | ----------------------------- |
+	| DB\_NAME    | Nome do banco Postgres        |
+	| DB\_USER    | Usuário do banco              |
+	| DB\_PASS    | Senha do banco                |
+	| DB\_HOST    | Host do banco (ex: localhost) |
+	| DB\_PORT    | Porta do banco (padrão 5432)  |
+	| JWT\_SECRET | Chave secreta para JWT        |
+
+
+##Rotas Principais
+
+
+| Método | Rota                      | Descrição                                               |
+| ------ | ------------------------- | ------------------------------------------------------- |
+| POST   | `/user/add/newPostFile`   | Adiciona nova postagem com arquivo (upload multipart)   |
+| POST   | `/postes/view/down/file`  | Retorna arquivo para download baseado no ID da postagem |
+| GET    | `/swagger`                | Interface Swagger UI da API                             |
+| ...    | (outras rotas GET, PATCH) | Conforme arquivos em `src/rotas`                        |
+
 
 
 
