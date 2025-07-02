@@ -41,20 +41,51 @@ Deploy simplificado via Render, com autenticação JWT e documentação Swagger 
 
 
 ├── config
-│   └── conexaoDB.php # Conexão PDO com Postgres (variáveis via env)
+│   └── conexaoDB.php
 ├── public
-│   ├── assets # CSS, JS e imagens públicas
-│   ├── upload
-│   │ └── postagens # Pasta para uploads temporários
-│   ├── index.php # Front controller da API
-│   └── swagger # Documentação Swagger UI
-├── src
-│   ├── controllers # Controladores que recebem as requisições
-│   ├── models # Modelos OOP interagindo com DB
-│   ├── rotas # Arquivos para configurar rotas GET, POST, PATCH, JWT
-│   └── utis # Utils como JWT, funções comuns
-├── README.md # Documentação do projeto
-└── swagger.json # Definição da API no padrão OpenAPI (Swagger)
+│   ├── assets
+│   │   ├── css
+│   │   ├── image
+│   │   └── js
+│   ├── index.php
+│   ├── swagger
+│   │   ├── favicon-16x16.png
+│   │   ├── favicon-32x32.png
+│   │   ├── index.css
+│   │   ├── index.html
+│   │   ├── oauth2-redirect.html
+│   │   ├── README.md
+│   │   ├── swagger-initializer.js
+│   │   ├── swagger.json
+│   │   ├── swagger-ui-bundle.js
+│   │   ├── swagger-ui.css
+│   │   ├── swagger-ui-es-bundle-core.js
+│   │   ├── swagger-ui-es-bundle.js
+│   │   ├── swagger-ui.js
+│   │   └── swagger-ui-standalone-preset.js
+│   └── upload
+│       └── postagens
+│           └── 12604753600_7_1751369311.mp3
+├── README.md
+└── src
+    ├── controllers
+    │   ├── controlPostes.php
+    │   └── controlUser.php
+    ├── models
+    │   ├── postagens.php
+    │   └── usuario.php
+    ├── rotas
+    │   ├── RotasGET.php
+    │   ├── RotasJWT.php
+    │   ├── RotasPATCH.php
+    │   ├── Rotas.php
+    │   └── RotasPOST.php
+    ├── utis
+    │   ├── Default.php
+    │   └── jwt.php
+    └── web
+        └── pg1.php
+
 
 ---
 
