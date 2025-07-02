@@ -40,4 +40,47 @@ Deploy simplificado via Render, com autenticação JWT e documentação Swagger 
 ## Estrutura do Projeto
 
 
+├── config
+│   └── conexaoDB.php # Conexão PDO com Postgres (variáveis via env)
+├── public
+│   ├── assets # CSS, JS e imagens públicas
+│   ├── upload
+│   │ └── postagens # Pasta para uploads temporários
+│   ├── index.php # Front controller da API
+│   └── swagger # Documentação Swagger UI
+├── src
+│   ├── controllers # Controladores que recebem as requisições
+│   ├── models # Modelos OOP interagindo com DB
+│   ├── rotas # Arquivos para configurar rotas GET, POST, PATCH, JWT
+│   └── utis # Utils como JWT, funções comuns
+├── README.md # Documentação do projeto
+└── swagger.json # Definição da API no padrão OpenAPI (Swagger)
+
+---
+
+## Tecnologias
+
+- PHP 8+ (Built-in Server para desenvolvimento)
+- PostgreSQL como banco de dados
+- JWT para autenticação e segurança
+- Swagger para documentação interativa da API
+- Deploy na plataforma Render.com (Free tier)
+
+---
+
+## Configuração do Ambiente
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/seu-projeto.git
+   cd seu-projeto
+
+DB_NAME=seubanco
+DB_USER=usuario
+DB_PASS=senha
+DB_HOST=localhost
+DB_PORT=5432
+JWT_SECRET=sua_chave_secreta_jwt
+
+
 
