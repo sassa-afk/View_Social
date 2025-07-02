@@ -39,53 +39,53 @@ Deploy simplificado via Render, com autenticação JWT e documentação Swagger 
 
 ## Estrutura do Projeto
 
- 
+		 
 
-├── config
-│   └── conexaoDB.php
-├── public
-│   ├── assets
-│   │   ├── css
-│   │   ├── image
-│   │   └── js
-│   ├── index.php
-│   ├── swagger
-│   │   ├── favicon-16x16.png
-│   │   ├── favicon-32x32.png
-│   │   ├── index.css
-│   │   ├── index.html
-│   │   ├── oauth2-redirect.html
-│   │   ├── README.md
-│   │   ├── swagger-initializer.js
-│   │   ├── swagger.json
-│   │   ├── swagger-ui-bundle.js
-│   │   ├── swagger-ui.css
-│   │   ├── swagger-ui-es-bundle-core.js
-│   │   ├── swagger-ui-es-bundle.js
-│   │   ├── swagger-ui.js
-│   │   └── swagger-ui-standalone-preset.js
-│   └── upload
-│       └── postagens
-│           └── 12604753600_7_1751369311.mp3
-├── README.md
-└── src
-    ├── controllers
-    │   ├── controlPostes.php
-    │   └── controlUser.php
-    ├── models
-    │   ├── postagens.php
-    │   └── usuario.php
-    ├── rotas
-    │   ├── RotasGET.php
-    │   ├── RotasJWT.php
-    │   ├── RotasPATCH.php
-    │   ├── Rotas.php
-    │   └── RotasPOST.php
-    ├── utis
-    │   ├── Default.php
-    │   └── jwt.php
-    └── web
-        └── pg1.php
+		├── config
+		│   └── conexaoDB.php
+		├── public
+		│   ├── assets
+		│   │   ├── css
+		│   │   ├── image
+		│   │   └── js
+		│   ├── index.php
+		│   ├── swagger
+		│   │   ├── favicon-16x16.png
+		│   │   ├── favicon-32x32.png
+		│   │   ├── index.css
+		│   │   ├── index.html
+		│   │   ├── oauth2-redirect.html
+		│   │   ├── README.md
+		│   │   ├── swagger-initializer.js
+		│   │   ├── swagger.json
+		│   │   ├── swagger-ui-bundle.js
+		│   │   ├── swagger-ui.css
+		│   │   ├── swagger-ui-es-bundle-core.js
+		│   │   ├── swagger-ui-es-bundle.js
+		│   │   ├── swagger-ui.js
+		│   │   └── swagger-ui-standalone-preset.js
+		│   └── upload
+		│       └── postagens
+		│           └── 12604753600_7_1751369311.mp3
+		├── README.md
+		└── src
+		    ├── controllers
+		    │   ├── controlPostes.php
+		    │   └── controlUser.php
+		    ├── models
+		    │   ├── postagens.php
+		    │   └── usuario.php
+		    ├── rotas
+		    │   ├── RotasGET.php
+		    │   ├── RotasJWT.php
+		    │   ├── RotasPATCH.php
+		    │   ├── Rotas.php
+		    │   └── RotasPOST.php
+		    ├── utis
+		    │   ├── Default.php
+		    │   └── jwt.php
+		    └── web
+			└── pg1.php
 
 
  
