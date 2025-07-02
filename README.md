@@ -5,18 +5,35 @@ Atualmente estudo e crio projetos com intenção aplicar meus conhecimentos pass
 📫 Você consegue chegar até mim através do email samuelsouto21@gmail.com .
 
 ---
-# Projeto backend de uma simples rede social criada em PHP
+# Projeto backend de uma simples rede social empresarial criada em PHP
  
-Esté é um projeto integrado que reúne diversas APIs úteis desenvolvido com o serviço node.js atraves de apis que desenvolvidas e aplicadas em trabalhos freelance. O objetivo foi centralizar e facilitar a comunicação com serviços externos por meio de uma estrutura em Node.js.
+Este projeto consiste no desenvolvimento de uma API backend em PHP, seguindo os princípios da arquitetura RESTful, para uma rede social interna simples voltada ao ambiente corporativo.
 
-Serviços integrados:
+A API permite funcionalidades básicas como criação de postagens com arquivos, autenticação JWT, e interação entre colaboradores dentro da empresa mostrando e colocando em pratica meus conhecimentos.
+
+**OBS:** Neste primeiro momento, o foco está na estruturação do backend e na construção das APIs RESTful. O desenvolvimento da interface frontend será realizado em seguida, integrando com os serviços já preparados.
 
 # Projeto API PHP - Render Deployment
 
-API RESTful em PHP orientada a objetos, projetada para servir postagens com upload e download de arquivos.  
-Deploy simplificado via Render, com autenticação JWT e documentação Swagger integrada.
+API RESTful em PHP orientada a objetos, projetada para servir postagens com upload e download de arquivos. Deploy simplificado via Render, com autenticação JWT e documentação Swagger integrada.
 
-#Regra de negocio 
+# Regra de negócio
+
+- Qualquer usuário pode logar informando dados de nome, CPF, telefone, e-mail, cargo e senha de acesso.
+
+- O processo de cadastro será realizado através de uma API simples REST sem autenticação.
+
+- Será utilizado um token JWT que é gerado ao logar e confirmar usuário e senha no processo de login do usuário:
+
+  + Todos os usuários autenticados gerarão um token que sempre será validado antes de fazer qualquer ação como visualização, inserção e atualização.
+  
+  + O login de acesso será o CPF informado e a senha cadastrada.
+
+- Os usuários do sistema poderão realizar postes com títulos e arquivos (mensagens ou recados e um arquivo informativo) ou apenas legendas como mensagens (mensagens ou recados).
+
+- Os usuários poderão editar apenas informações do seu próprio acesso, mas de forma limitada — o CPF não pode ser editado.
+
+- Os postes dos usuários não poderão ser apagados, mas poderão ter sua visualização marcada como false, tornando os dados indisponíveis para o próprio usuário e para os demais usuários.
 
 
 ---
@@ -37,7 +54,6 @@ Deploy simplificado via Render, com autenticação JWT e documentação Swagger 
 - [Contribuição](#contribuição)  
 - [Licença](#licença)
 
----
 
 ## Estrutura do Projeto
 
@@ -139,7 +155,7 @@ Exemplo .env:
 	| JWT\_SECRET | Chave secreta para JWT        |
 
 
-##Rotas Principais
+## Rotas Principais
 
 
 | Método | Rota                      | Descrição                                               |
