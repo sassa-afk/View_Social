@@ -39,6 +39,7 @@ Deploy simplificado via Render, com autenticação JWT e documentação Swagger 
 
 ## Estrutura do Projeto
 
+ 
 
 ├── config
 │   └── conexaoDB.php
@@ -87,7 +88,7 @@ Deploy simplificado via Render, com autenticação JWT e documentação Swagger 
         └── pg1.php
 
 
----
+ 
 
 ## Tecnologias
 
