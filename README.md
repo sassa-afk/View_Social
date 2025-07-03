@@ -203,7 +203,7 @@ Exemplo .env:
 	DB_PORT=5432
 	JWT_SECRET=sua_chave_secreta_jwt
 
- 
+---
 
 As Variáveis sensíveis deste projetos (como credenciais do banco) serão criadas e acessadas por `getenv()` e definidas como variáveis de ambiente no servidor RENDER onde o projeto será alocado . 
 
