@@ -294,6 +294,11 @@ As Criação das tabelas principais do projeto, estruturado e baseado nas tabela
 
 ---
 
+**Diagrama entidade relacionamento do banco**
+
+![image](https://github.com/user-attachments/assets/9175da3f-fae5-4885-a9e5-2344652ba8c0)
+
+
 
 ## Armazenamento de Arquivos
 
