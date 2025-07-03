@@ -203,7 +203,7 @@ Exemplo .env:
 	DB_PORT=5432
 	JWT_SECRET=sua_chave_secreta_jwt
 
----
+ 
 
 As Variáveis sensíveis deste projetos (como credenciais do banco) serão criadas e acessadas por `getenv()` e definidas como variáveis de ambiente no servidor RENDER onde o projeto será alocado . 
 
@@ -226,8 +226,7 @@ Esta aplicação utilizar em sua modelagem o serviço Postgreas, comando de mode
 
 -- psql -U postgres -c "CREATE DATABASE sistema_postagens WITH OWNER = postgres ENCODING = 'UTF8' LC_COLLATE = 'pt_BR.UTF-8' LC_CTYPE = 'pt_BR.UTF-8' TABLESPACE = pg_default CONNECTION LIMIT = -1;"
 
---  Criação das tabelas principais do projeto
---  Estrutura baseada nas tabelas: pessoa, acessos, postagem, comentario
+As Criação das tabelas principais do projeto, estruturado e baseado nas tabelas: pessoa, acessos, postagem, comentario
 
 -- Tabela pessoa
 CREATE TABLE IF NOT EXISTS pessoa (
