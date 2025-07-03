@@ -7,38 +7,40 @@ Atualmente estudo e crio projetos com intenção aplicar meus conhecimentos pass
 **Você consegue chegar até mim através do email samuelsouto21@gmail.com .**
 
 ---
-# Projeto backend de uma simples rede social empresarial criada em PHP
+# Projeto backend (posteriormente fullstack) de uma simples rede social empresarial criada em PHP
  
 Este projeto consiste no desenvolvimento de uma API backend em PHP, seguindo os princípios da arquitetura RESTful, para uma rede social interna simples voltada ao ambiente corporativo.
 
-A API permite funcionalidades básicas como criação de postagens com arquivos, autenticação JWT, e interação entre colaboradores dentro da empresa mostrando e colocando em pratica meus conhecimentos.
+Primeiro séra criado uma API que permitira funcionalidades básicas como criação de postagens com arquivos, autenticação JWT, e interação entre colaboradores dentro da empresa mostrando e colocando em pratica meus conhecimentos.
 
 **OBS:** Neste primeiro momento, o foco está na estruturação do backend e na construção das APIs RESTful. O desenvolvimento da interface frontend será realizado em seguida, integrando com os serviços já preparados.
 
 # Regra de negócio
 
-- Qualquer usuário pode logar informando dados de nome, CPF, telefone, e-mail, cargo e senha de acesso.
-- O processo de cadastro será realizado através de uma API simples REST sem autenticação.
+- Qualquer usuário pode se cadastrar informando dados de nome, CPF, telefone, e-mail, cargo e senha de acesso.
+- O processo de cadastro será realizado através de uma API simples REST sem autenticação, mas as demais chamadas das APIS serão RESTFULL .
+
 - Será utilizado um token JWT que é gerado ao logar e confirmar usuário e senha no processo de login do usuário:
   + Todos os usuários autenticados gerarão um token que sempre será validado antes de fazer qualquer ação como visualização, inserção e atualização.
-  
   + O login de acesso será o CPF informado e a senha cadastrada.
-- Os usuários do sistema poderão realizar postes com títulos e arquivos (mensagens ou recados e um arquivo informativo) ou apenas legendas como mensagens (mensagens ou recados).
+  
+- Os usuários do sistema poderão realizar criar postes com títulos e arquivos (mensagens ou recados e um arquivo informativo) ou apenas legendas como mensagens (mensagens ou recados).
+
 - Os usuários poderão editar apenas informações do seu próprio acesso, mas de forma limitada — o CPF não pode ser editado.
+
 - Os postes dos usuários não poderão ser apagados, mas poderão ter sua visualização marcada como false, tornando os dados indisponíveis para o próprio usuário e para os demais usuários.
 
 # Projeto disponivel no servidor free Render Deployment
 
 API RESTful em PHP orientada a objetos, projetada para servir postagens com upload e download de arquivos. Deploy simplificado via Render, com autenticação JWT e documentação Swagger integrada.
 
-
 ---
 
 ## Índice
 
+- [Tecnologias](#tecnologias)  
 - [Estrutura do Projeto](#estrutura-do-projeto)  
 - [Diagrama de classe](#diagrama-de-classe)  
-- [Tecnologias](#tecnologias)  
 - [Configuração do Ambiente](#configuração-do-ambiente)  
 - [Variáveis de Ambiente](#variáveis-de-ambiente)  
 - [Banco de Dados](#banco-de-dados)  
@@ -47,6 +49,15 @@ API RESTful em PHP orientada a objetos, projetada para servir postagens com uplo
 - [Swagger](#swagger)  
 - [Licença](#licença)
 
+
+
+## Tecnologias
+
+- PHP 8+ (Built-in Server para desenvolvimento)
+- PostgreSQL como banco de dados
+- JWT para autenticação e segurança
+- Swagger para documentação interativa da API
+- Deploy na plataforma Render.com (Free tier)
 
 ## Estrutura do Projeto
 
@@ -171,14 +182,6 @@ O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para P
 ## Diagrama de classe
 ---
 
-## Tecnologias
-
-- PHP 8+ (Built-in Server para desenvolvimento)
-- PostgreSQL como banco de dados
-- JWT para autenticação e segurança
-- Swagger para documentação interativa da API
-- Deploy na plataforma Render.com (Free tier)
-
 ## Configuração do Ambiente
 
 Configure variáveis de ambiente para conexão com o banco Postgres.
@@ -218,7 +221,58 @@ As Variáveis sensíveis deste projetos (como credenciais do banco) serão criad
 
 ## Banco de Dados 
 
-Esta aplicação utilizar em sua modelagem o serviço Postgreas 
+Esta aplicação utilizar em sua modelagem o serviço Postgreas, comando de modelagem do banco :
+
+
+-- psql -U postgres -c "CREATE DATABASE sistema_postagens WITH OWNER = postgres ENCODING = 'UTF8' LC_COLLATE = 'pt_BR.UTF-8' LC_CTYPE = 'pt_BR.UTF-8' TABLESPACE = pg_default CONNECTION LIMIT = -1;"
+
+--  Criação das tabelas principais do projeto
+--  Estrutura baseada nas tabelas: pessoa, acessos, postagem, comentario
+
+-- Tabela pessoa
+CREATE TABLE IF NOT EXISTS pessoa (
+    cpf               VARCHAR(11) PRIMARY KEY,
+    nome              VARCHAR(100) NOT NULL,
+    email             VARCHAR(100) NOT NULL UNIQUE,
+    telefone          VARCHAR(15),
+    caminho_foto      TEXT,
+    sexo              VARCHAR(15),
+    funcao_na_empresa VARCHAR(100)
+);
+
+-- Tabela acessos
+CREATE TABLE IF NOT EXISTS acessos (
+    id           SERIAL PRIMARY KEY,
+    login        VARCHAR(11) NOT NULL UNIQUE,
+    senha        VARCHAR(255) NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT acessos_login_fkey FOREIGN KEY (login) REFERENCES pessoa(cpf)
+);
+
+-- Tabela postagem
+CREATE TABLE IF NOT EXISTS postagem (
+    id              SERIAL PRIMARY KEY,
+    id_autor        VARCHAR(11),
+    data_postagem   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    caminho_arquivo TEXT,
+    legenda         TEXT,
+    ativo           BOOLEAN,
+
+    CONSTRAINT postagem_id_autor_fkey FOREIGN KEY (id_autor) REFERENCES pessoa(cpf)
+);
+
+-- Tabela comentario
+CREATE TABLE IF NOT EXISTS comentario (
+    id_comentario   SERIAL PRIMARY KEY,
+    id_post         INTEGER NOT NULL,
+    cpf_comentador  VARCHAR(11) NOT NULL,
+    data_comentario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    comentario      TEXT NOT NULL,
+
+    CONSTRAINT comentario_id_post_fkey FOREIGN KEY (id_post) REFERENCES postagem(id),
+    CONSTRAINT comentario_cpf_comentador_fkey FOREIGN KEY (cpf_comentador) REFERENCES pessoa(cpf)
+);
 
 
 
@@ -257,5 +311,5 @@ Essa imagem fica armazenada na aplicação como fallback para usuários sem avat
 
 
 
-##Swagger
+## Swagger
 
