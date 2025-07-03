@@ -1,7 +1,9 @@
 👋 Olá , eu sou o Samuel Souto dos Santos / @sassa-afk 👀 ..
 
 Sou estudante de Sistemas de Informação e desenvolvedor em formação, com projetos voltados à aplicação prática dos conhecimentos adquiridos tanto na graduação quanto na experiência de trabalho.
+
 Atualmente estudo e crio projetos com intenção aplicar meus conhecimentos passados ao longo de minha experiência academica e no mercado de trabalho
+
 📫 Você consegue chegar até mim através do email samuelsouto21@gmail.com .
 
 ---
@@ -50,7 +52,7 @@ API RESTful em PHP orientada a objetos, projetada para servir postagens com uplo
 
 
 ## Estrutura do Projeto
-
+sd
 
 
 ---	 
@@ -159,6 +161,8 @@ Exemplo .env:
 | GET    | `/swagger`                | Interface Swagger UI da API                             |
 | ...    | (outras rotas GET, PATCH) | Conforme arquivos em `src/rotas`                        |
 
+
+Pessoal eu não gostaria de apresentar não fico muito avontade em falar em publico nao e não curto muito não, mas se o trabalho ficar com muita informação  
 
 
 
