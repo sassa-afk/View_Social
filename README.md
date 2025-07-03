@@ -294,6 +294,8 @@ As Criação das tabelas principais do projeto, estruturado e baseado nas tabela
 
 ---
 
+![image](https://github.com/user-attachments/assets/32119e07-ebb6-4919-b6e0-832d3f3badb4)
+
 
 ## Armazenamento de Arquivos
 
