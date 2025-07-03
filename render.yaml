@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: api-php
+    env: php
+    buildCommand: ""
+    startCommand: ""
+    plan: free
+    rootDir: ./
+    autoDeploy: true
+    envVars:
+      - key: DB_PASS
+        value: "GORfVobKcoWeSbPONxxXQN9bswCj7vCk"
+      - key: DB_SERVER
+        value: "dpg-d19fbfeuk2gs73dfsqk0-a.oregon-postgres.render.com"
+      - key: DB_USER
+        value: "sassa"
+      - key: DB_PORT
+        value: 5432
+      - key: DB_NAME
+        value: "comunidade_1"

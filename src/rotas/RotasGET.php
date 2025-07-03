@@ -38,7 +38,6 @@ if ($method === 'GET') {
 
 // -------------- APIS -------------
 	header('Content-Type: Application/json');
-// -------------- ativos  -------------
 
     if( $url === '/user/list/self'){
 
@@ -50,6 +49,8 @@ if ($method === 'GET') {
 		);
     }
 
+// -------------- ativos  -------------
+    
     if( $url === '/usuarios/list/onlyUsers'){ // <<< 
     	
 

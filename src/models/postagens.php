@@ -73,6 +73,10 @@ private function fileDownPost($list) {
             header('Cache-Control: must-revalidate');
             header('Pragma: public');
             header('Content-Length: ' . filesize($caminho));
+            echo json_encode( [
+            	"message " => "Arquivo e legenda disponivel" , 
+            	"data" => $ret['data'][0]['legenda']
+            ]);
             readfile($caminho);
             exit;
         } else {
