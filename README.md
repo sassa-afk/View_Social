@@ -224,12 +224,12 @@ As Variáveis sensíveis deste projetos (como credenciais do banco) serão criad
 Esta aplicação utilizar em sua modelagem o serviço Postgreas, comando de modelagem do banco :
 
 ---
-	psql -U postgres -c "CREATE DATABASE sistema_postagens WITH OWNER = postgres ENCODING = 'UTF8' LC_COLLATE = 'pt_BR.UTF-8' LC_CTYPE = 'pt_BR.UTF-8' TABLESPACE = pg_default CONNECTION LIMIT = -1;"
+	psql -U postgres -c "CREATE DATABASE comunidade_1  WITH OWNER = postgres ENCODING = 'UTF8' LC_COLLATE = 'pt_BR.UTF-8' LC_CTYPE = 'pt_BR.UTF-8' TABLESPACE = pg_default CONNECTION LIMIT = -1;"
 ---
 
 As Criação das tabelas principais do projeto, estruturado e baseado nas tabelas: pessoa, acessos, postagem, comentario
 
-Tabela pessoa
+**Tabela pessoa**
 
 ---
 
@@ -245,7 +245,7 @@ Tabela pessoa
 
 ---
 
-Tabela acessos
+**Tabela acessos**
 
 ---
 
@@ -260,7 +260,7 @@ Tabela acessos
 
 ---
 
-Tabela postagem
+**Tabela postagem**
 
 ---
 
@@ -277,7 +277,7 @@ Tabela postagem
 
 ---
 
-Tabela comentario
+**Tabela comentario**
 
 ---
 
