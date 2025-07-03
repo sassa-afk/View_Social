@@ -228,8 +228,9 @@ Esta aplicação utilizar em sua modelagem o serviço Postgreas, comando de mode
 
 As Criação das tabelas principais do projeto, estruturado e baseado nas tabelas: pessoa, acessos, postagem, comentario
 
--- **Tabela pessoa**
+ **Tabela pessoa**
 
+---
 CREATE TABLE IF NOT EXISTS pessoa (
     cpf               VARCHAR(11) PRIMARY KEY,
     nome              VARCHAR(100) NOT NULL,
@@ -239,9 +240,9 @@ CREATE TABLE IF NOT EXISTS pessoa (
     sexo              VARCHAR(15),
     funcao_na_empresa VARCHAR(100)
 );
-
--- Tabela acessos
-
+---
+ Tabela acessos
+---
 CREATE TABLE IF NOT EXISTS acessos (
     id           SERIAL PRIMARY KEY,
     login        VARCHAR(11) NOT NULL UNIQUE,
@@ -250,9 +251,9 @@ CREATE TABLE IF NOT EXISTS acessos (
 
     CONSTRAINT acessos_login_fkey FOREIGN KEY (login) REFERENCES pessoa(cpf)
 );
-
--- Tabela postagem
-
+---
+ Tabela postagem
+---
 CREATE TABLE IF NOT EXISTS postagem (
     id              SERIAL PRIMARY KEY,
     id_autor        VARCHAR(11),
@@ -263,9 +264,9 @@ CREATE TABLE IF NOT EXISTS postagem (
 
     CONSTRAINT postagem_id_autor_fkey FOREIGN KEY (id_autor) REFERENCES pessoa(cpf)
 );
-
--- Tabela comentario
-
+---
+ Tabela comentario
+---
 CREATE TABLE IF NOT EXISTS comentario (
     id_comentario   SERIAL PRIMARY KEY,
     id_post         INTEGER NOT NULL,
@@ -276,7 +277,7 @@ CREATE TABLE IF NOT EXISTS comentario (
     CONSTRAINT comentario_id_post_fkey FOREIGN KEY (id_post) REFERENCES postagem(id),
     CONSTRAINT comentario_cpf_comentador_fkey FOREIGN KEY (cpf_comentador) REFERENCES pessoa(cpf)
 );
-
+---
 
 
 ## Armazenamento de Arquivos
