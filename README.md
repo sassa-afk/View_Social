@@ -53,10 +53,64 @@ API RESTful em PHP orientada a objetos, projetada para servir postagens com uplo
 
 ## Estrutura do Projeto
 
-Este projeto segue uma estrutura organizada em camadas, utilizando o padrão MVC (Model–View–Controller) adaptado para construção de uma API REST em PHP puro.
+O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para PHP puro com foco em APIs REST:
 
+- `public/`: Entrada principal da aplicação, arquivos públicos e indexador.
+- `src/rotas/`: Arquivos de roteamento organizados por método HTTP.
+- `src/controllers/`: Controladores responsáveis pela lógica de negócio e retorno de resposta.
+- `src/models/`: Models com acesso ao banco via PDO (PostgreSQL).
+- `src/utis/`: Funções utilitárias (validações, JWT etc).
+- `config/`: Arquivos de configuração e conexão ao banco.
 
-# Fluxo de Inicialização
+---	 
+	├── config
+	│   └── conexaoDB.php
+	├── public
+	│   ├── assets
+	│   │   ├── css
+	│   │   ├── image
+	│   │   └── js
+	│   ├── index.php
+	│   ├── swagger
+	│   │   ├── favicon-16x16.png
+	│   │   ├── favicon-32x32.png
+	│   │   ├── index.css
+	│   │   ├── index.html
+	│   │   ├── oauth2-redirect.html
+	│   │   ├── README.md
+	│   │   ├── swagger-initializer.js
+	│   │   ├── swagger.json
+	│   │   ├── swagger-ui-bundle.js
+	│   │   ├── swagger-ui.css
+	│   │   ├── swagger-ui-es-bundle-core.js
+	│   │   ├── swagger-ui-es-bundle.js
+	│   │   ├── swagger-ui.js
+	│   │   └── swagger-ui-standalone-preset.js
+	│   └── upload
+	│       └── postagens
+	│           └── 12604753600_7_1751369311.mp3
+	├── README.md
+	└── src
+	    ├── controllers
+	    │   ├── controlPostes.php
+	    │   └── controlUser.php
+	    ├── models
+	    │   ├── postagens.php
+	    │   └── usuario.php
+	    ├── rotas
+	    │   ├── RotasGET.php
+	    │   ├── RotasJWT.php
+	    │   ├── RotasPATCH.php
+	    │   ├── Rotas.php
+	    │   └── RotasPOST.php
+	    ├── utis
+	    │   ├── Default.php
+	    │   └── jwt.php
+	    └── web
+		└── pg1.php
+---
+
+**Fluxo de Inicialização (detalhado)**
 
 - O ponto de entrada da aplicação é o arquivo `public/index.php`.
 - Esse arquivo inicia a API e referencia o sistema de rotas.
@@ -67,48 +121,49 @@ Este projeto segue uma estrutura organizada em camadas, utilizando o padrão MVC
   - `RotasJWT.php` (rotas protegidas)
   - `Rotas.php` (núcleo do roteador)
 
-# Roteamento
+**Roteamento (detalhado)**
 
 - As rotas fazem o direcionamento da requisição HTTP para os métodos nos controllers.
 - Parâmetros são validados e organizados antes de chegar na camada de lógica.
 - As rotas também identificam quais métodos aceitam `GET`, `POST` ou `PATCH`.
+- Ele fica exclusivo para realizar aponta as rotas e tipos de passagem de dados ( string , files , inteiros e outros).
 
-# Camada de Lógica – Controllers
+**Camada de Lógica – Controllers (detalhado)**
 
 - Localizados em `src/controllers/`, os controllers recebem as requisições já tratadas e direcionam para os models.
-- Formatam o retorno (mensagem + status HTTP) com base no resultado dos models.
+- Formatam o retorno (mensagem + status HTTP) com base no resultado dos models a principios de execução de cruds.
 - Também realizam validações de regra de negócio, se necessário.
 
 
-# Camada de Dados – Models
+**Camada de Dados – Models (detalhado)**
 
-- Em `src/models/` estão os models que fazem o acesso direto ao banco de dados PostgreSQL.
+- Em `src/models/` estão os models que fazem o acesso direto ao banco de dados PostgreSQL de forma privada utilizandoencapsulada em métodos privados e exposta apenas por métodos públicos.
 - Cada model herda a classe abstrata `conexaoDB` (em `config/conexaoDB.php`) que controla a conexão.
 - A comunicação com o banco segue padrão orientado a objetos com métodos públicos chamando lógicas privadas.
 
-ss
-# Utilitários
+
+**Utilitários (detalhado)**
 
 - A pasta `src/utis/` contém funções e classes auxiliares:
   - `jwt.php`: validação e geração de tokens JWT.
   - `Default.php`: validações genéricas e tratadores padrão.
 
 
-# Swagger – Documentação da API
+**Swagger – Documentação da API (detalhado)**
 
 - A documentação interativa da API está em `public/swagger/`.
 - A interface é exibida via `swagger/index.html`, utilizando o arquivo `swagger.json`.
 - Permite testar endpoints, visualizar parâmetros e simular requisições com token.
 
 
-# Upload de Arquivos
+**Upload de Arquivos (detalhado)**
 
 - Arquivos enviados via endpoints (ex: imagens de postagens) são salvos em `public/upload/postagens/`.
 - O acesso pode ser direto via URL ou por endpoints protegidos.
 - Em ambiente como Render (plano gratuito), o armazenamento é temporário – a pasta pode ser apagada após reinício da instância.
 
 
-# Segurança
+**Segurança (detalhado)**
 
 - A autenticação é feita via tokens JWT, obrigatórios para a maioria dos endpoints.
 - O token deve ser enviado no header `Authorization: Bearer {token}`.
@@ -121,54 +176,6 @@ ss
 - A arquitetura está pronta para expansão: ideal para APIs de pequeno a médio porte.
 - Recomendado para ambientes como Render, Railway ou servidores com PHP puro habilitado.
 
-
----	 
-
-		├── config
-		│   └── conexaoDB.php
-		├── public
-		│   ├── assets
-		│   │   ├── css
-		│   │   ├── image
-		│   │   └── js
-		│   ├── index.php
-		│   ├── swagger
-		│   │   ├── favicon-16x16.png
-		│   │   ├── favicon-32x32.png
-		│   │   ├── index.css
-		│   │   ├── index.html
-		│   │   ├── oauth2-redirect.html
-		│   │   ├── README.md
-		│   │   ├── swagger-initializer.js
-		│   │   ├── swagger.json
-		│   │   ├── swagger-ui-bundle.js
-		│   │   ├── swagger-ui.css
-		│   │   ├── swagger-ui-es-bundle-core.js
-		│   │   ├── swagger-ui-es-bundle.js
-		│   │   ├── swagger-ui.js
-		│   │   └── swagger-ui-standalone-preset.js
-		│   └── upload
-		│       └── postagens
-		│           └── 12604753600_7_1751369311.mp3
-		├── README.md
-		└── src
-		    ├── controllers
-		    │   ├── controlPostes.php
-		    │   └── controlUser.php
-		    ├── models
-		    │   ├── postagens.php
-		    │   └── usuario.php
-		    ├── rotas
-		    │   ├── RotasGET.php
-		    │   ├── RotasJWT.php
-		    │   ├── RotasPATCH.php
-		    │   ├── Rotas.php
-		    │   └── RotasPOST.php
-		    ├── utis
-		    │   ├── Default.php
-		    │   └── jwt.php
-		    └── web
-			└── pg1.php
 
 
  
