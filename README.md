@@ -4,7 +4,7 @@ Sou estudante de Sistemas de Informação e desenvolvedor em formação, com pro
 
 Atualmente estudo e crio projetos com intenção aplicar meus conhecimentos passados ao longo de minha experiência academica e no mercado de trabalho
 
-📫 Você consegue chegar até mim através do email samuelsouto21@gmail.com .
+**Você consegue chegar até mim através do email samuelsouto21@gmail.com .**
 
 ---
 # Projeto backend de uma simples rede social empresarial criada em PHP
@@ -40,6 +40,7 @@ API RESTful em PHP orientada a objetos, projetada para servir postagens com uplo
 - [Tecnologias](#tecnologias)  
 - [Configuração do Ambiente](#configuração-do-ambiente)  
 - [Variáveis de Ambiente](#variáveis-de-ambiente)  
+- [Diagrama de classe](#variáveis-de-ambiente)  
 - [Rotas Principais](#rotas-principais)  
 - [Upload de Arquivos](#upload-de-arquivos)  
 - [Download de Arquivos](#download-de-arquivos)  
@@ -63,14 +64,14 @@ O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para P
 - `config/`: Arquivos de configuração e conexão ao banco.
 
 ---	 
-	├── config
+	├── config →  **Camada de configuração**
 	│   └── conexaoDB.php
-	├── public
+	├── public → **Camada view**
 	│   ├── assets
 	│   │   ├── css
 	│   │   ├── image
 	│   │   └── js
-	│   ├── index.php
+	│   ├── index.php  → **Inicialização**
 	│   ├── swagger
 	│   │   ├── favicon-16x16.png
 	│   │   ├── favicon-32x32.png
@@ -91,19 +92,19 @@ O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para P
 	│           └── 12604753600_7_1751369311.mp3
 	├── README.md
 	└── src
-	    ├── controllers
+	    ├── controllers  → **Camada de controle**
 	    │   ├── controlPostes.php
 	    │   └── controlUser.php
-	    ├── models
+	    ├── models  → **Camada de modelagem**
 	    │   ├── postagens.php
 	    │   └── usuario.php
-	    ├── rotas
+	    ├── rotas   → **Camada de dominio/roteamento**
 	    │   ├── RotasGET.php
 	    │   ├── RotasJWT.php
-	    │   ├── RotasPATCH.php
+	    │   ├── RotasPATCH.php 
 	    │   ├── Rotas.php
 	    │   └── RotasPOST.php
-	    ├── utis
+	    ├── utis   → **Camada de utilidade padrão**
 	    │   ├── Default.php
 	    │   └── jwt.php
 	    └── web
@@ -170,15 +171,11 @@ O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para P
 - Endpoints protegidos estão definidos principalmente em `RotasJWT.php`.
 
 
-## 📌 Observações Finais
+**Observações Finais**
 
 - Variáveis sensíveis (como credenciais do banco) devem ser acessadas por `getenv()` e definidas como variáveis de ambiente no servidor.
 - A arquitetura está pronta para expansão: ideal para APIs de pequeno a médio porte.
 - Recomendado para ambientes como Render, Railway ou servidores com PHP puro habilitado.
-
-
-
- 
 
 ## Tecnologias
 
@@ -189,6 +186,10 @@ O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para P
 - Deploy na plataforma Render.com (Free tier)
 
 ---
+
+## Diagrama de classe
+---
+
 
 ## Configuração do Ambiente
 
