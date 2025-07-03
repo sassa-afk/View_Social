@@ -15,10 +15,6 @@ A API permite funcionalidades básicas como criação de postagens com arquivos,
 
 **OBS:** Neste primeiro momento, o foco está na estruturação do backend e na construção das APIs RESTful. O desenvolvimento da interface frontend será realizado em seguida, integrando com os serviços já preparados.
 
-# Projeto API PHP - Render Deployment
-
-API RESTful em PHP orientada a objetos, projetada para servir postagens com upload e download de arquivos. Deploy simplificado via Render, com autenticação JWT e documentação Swagger integrada.
-
 # Regra de negócio
 
 - Qualquer usuário pode logar informando dados de nome, CPF, telefone, e-mail, cargo e senha de acesso.
@@ -31,24 +27,24 @@ API RESTful em PHP orientada a objetos, projetada para servir postagens com uplo
 - Os usuários poderão editar apenas informações do seu próprio acesso, mas de forma limitada — o CPF não pode ser editado.
 - Os postes dos usuários não poderão ser apagados, mas poderão ter sua visualização marcada como false, tornando os dados indisponíveis para o próprio usuário e para os demais usuários.
 
+# Projeto disponivel no servidor free Render Deployment
+
+API RESTful em PHP orientada a objetos, projetada para servir postagens com upload e download de arquivos. Deploy simplificado via Render, com autenticação JWT e documentação Swagger integrada.
+
 
 ---
 
 ## Índice
 
 - [Estrutura do Projeto](#estrutura-do-projeto)  
+- [Diagrama de classe](#diagrama-de-classe)  
 - [Tecnologias](#tecnologias)  
 - [Configuração do Ambiente](#configuração-do-ambiente)  
 - [Variáveis de Ambiente](#variáveis-de-ambiente)  
-- [Diagrama de classe](#variáveis-de-ambiente)  
-- [Rotas Principais](#rotas-principais)  
-- [Upload de Arquivos](#upload-de-arquivos)  
-- [Download de Arquivos](#download-de-arquivos)  
-- [Autenticação](#autenticação)  
-- [Swagger](#swagger)  
 - [Banco de Dados](#banco-de-dados)  
-- [Considerações sobre Render (Free)](#considerações-sobre-render-free)  
-- [Contribuição](#contribuição)  
+- [Armazenamento de Arquivos](#armazenamento-de-arquivos)  
+- [Rotas Principais](#rotas-principais)  
+- [Swagger](#swagger)  
 - [Licença](#licença)
 
 
@@ -56,7 +52,7 @@ API RESTful em PHP orientada a objetos, projetada para servir postagens com uplo
 
 O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para PHP puro com foco em APIs REST:
 
-- `public/`: Entrada principal da aplicação, arquivos públicos e indexador.
+- `public/`: Entrada principal da aplicação, arquivos públicos , indexador e documentação swaggerWW.
 - `src/rotas/`: Arquivos de roteamento organizados por método HTTP.
 - `src/controllers/`: Controladores responsáveis pela lógica de negócio e retorno de resposta.
 - `src/models/`: Models com acesso ao banco via PDO (PostgreSQL).
@@ -88,8 +84,8 @@ O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para P
 	│   │   ├── swagger-ui.js
 	│   │   └── swagger-ui-standalone-preset.js
 	│   └── upload
+	│       ├── foto_perfil
 	│       └── postagens
-	│           └── 12604753600_7_1751369311.mp3
 	├── README.md
 	└── src
 	    ├── controllers  → **Camada de controle**
@@ -171,11 +167,9 @@ O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para P
 - Endpoints protegidos estão definidos principalmente em `RotasJWT.php`.
 
 
-**Observações Finais**
 
-- Variáveis sensíveis (como credenciais do banco) devem ser acessadas por `getenv()` e definidas como variáveis de ambiente no servidor.
-- A arquitetura está pronta para expansão: ideal para APIs de pequeno a médio porte.
-- Recomendado para ambientes como Render, Railway ou servidores com PHP puro habilitado.
+## Diagrama de classe
+---
 
 ## Tecnologias
 
@@ -185,16 +179,10 @@ O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para P
 - Swagger para documentação interativa da API
 - Deploy na plataforma Render.com (Free tier)
 
----
-
-## Diagrama de classe
----
-
-
 ## Configuração do Ambiente
 
 Configure variáveis de ambiente para conexão com o banco Postgres.
-Exemplo .env:
+
 ---
 	1. Clone o repositório:
 	   ```bash
@@ -214,7 +202,10 @@ Exemplo .env:
 
 ---
 
-- Variáveis de Ambiente
+As Variáveis sensíveis deste projetos (como credenciais do banco) serão criadas e acessadas por `getenv()` e definidas como variáveis de ambiente no servidor RENDER onde o projeto será alocado . 
+
+
+## Variáveis de Ambiente
 
 	| Variável    | Descrição                     |
 	| ----------- | ----------------------------- |
@@ -224,6 +215,33 @@ Exemplo .env:
 	| DB\_HOST    | Host do banco (ex: localhost) |
 	| DB\_PORT    | Porta do banco (padrão 5432)  |
 	| JWT\_SECRET | Chave secreta para JWT        |
+
+## Banco de Dados 
+
+Esta aplicação utilizar em sua modelagem o serviço Postgreas 
+
+
+
+## Armazenamento de Arquivos
+
+Os arquivos enviados pelos usuários são armazenados na pasta pública da aplicação, localizada em public/upload . Essa pasta contém duas subpastas específicas:
+
+1. **`postagens/`**  
+   - Armazena os arquivos enviados pelos usuários nas postagens.
+   - Os arquivos são renomeados seguindo o padrão:  
+     ```
+     {cpf}_{id}_{timestamp}.{extensão}
+     ```
+     Exemplo:  
+     ```
+     00004753600_7_1751369311.mp3
+     ```
+2. **`foto_perfil/`**  
+   - Armazena as fotos de perfil dos usuários.
+   - Também segue um padrão de nome baseado no CPF ou ID do usuário.
+
+Se o usuário **não tiver uma foto de perfil**, o sistema utiliza uma imagem padrão chamada:
+Essa imagem fica armazenada na aplicação como fallback para usuários sem avatar.
 
 
 ## Rotas Principais
@@ -237,7 +255,7 @@ Exemplo .env:
 | ...    | (outras rotas GET, PATCH) | Conforme arquivos em `src/rotas`                        |
 
 
-Pessoal eu não gostaria de apresentar não fico muito avontade em falar em publico nao e não curto muito não, mas se o trabalho ficar com muita informação  
 
 
+##Swagger
 
