@@ -52,7 +52,74 @@ API RESTful em PHP orientada a objetos, projetada para servir postagens com uplo
 
 
 ## Estrutura do Projeto
-sd
+
+Este projeto segue uma estrutura organizada em camadas, utilizando o padrão MVC (Model–View–Controller) adaptado para construção de uma API REST em PHP puro.
+
+
+# Fluxo de Inicialização
+
+- O ponto de entrada da aplicação é o arquivo `public/index.php`.
+- Esse arquivo inicia a API e referencia o sistema de rotas.
+- As rotas estão localizadas em `src/rotas/` e são divididas por método HTTP:
+  - `RotasGET.php`
+  - `RotasPOST.php`
+  - `RotasPATCH.php`
+  - `RotasJWT.php` (rotas protegidas)
+  - `Rotas.php` (núcleo do roteador)
+
+# Roteamento
+
+- As rotas fazem o direcionamento da requisição HTTP para os métodos nos controllers.
+- Parâmetros são validados e organizados antes de chegar na camada de lógica.
+- As rotas também identificam quais métodos aceitam `GET`, `POST` ou `PATCH`.
+
+# Camada de Lógica – Controllers
+
+- Localizados em `src/controllers/`, os controllers recebem as requisições já tratadas e direcionam para os models.
+- Formatam o retorno (mensagem + status HTTP) com base no resultado dos models.
+- Também realizam validações de regra de negócio, se necessário.
+
+
+# Camada de Dados – Models
+
+- Em `src/models/` estão os models que fazem o acesso direto ao banco de dados PostgreSQL.
+- Cada model herda a classe abstrata `conexaoDB` (em `config/conexaoDB.php`) que controla a conexão.
+- A comunicação com o banco segue padrão orientado a objetos com métodos públicos chamando lógicas privadas.
+
+ss
+# Utilitários
+
+- A pasta `src/utis/` contém funções e classes auxiliares:
+  - `jwt.php`: validação e geração de tokens JWT.
+  - `Default.php`: validações genéricas e tratadores padrão.
+
+
+# Swagger – Documentação da API
+
+- A documentação interativa da API está em `public/swagger/`.
+- A interface é exibida via `swagger/index.html`, utilizando o arquivo `swagger.json`.
+- Permite testar endpoints, visualizar parâmetros e simular requisições com token.
+
+
+# Upload de Arquivos
+
+- Arquivos enviados via endpoints (ex: imagens de postagens) são salvos em `public/upload/postagens/`.
+- O acesso pode ser direto via URL ou por endpoints protegidos.
+- Em ambiente como Render (plano gratuito), o armazenamento é temporário – a pasta pode ser apagada após reinício da instância.
+
+
+# Segurança
+
+- A autenticação é feita via tokens JWT, obrigatórios para a maioria dos endpoints.
+- O token deve ser enviado no header `Authorization: Bearer {token}`.
+- Endpoints protegidos estão definidos principalmente em `RotasJWT.php`.
+
+
+## 📌 Observações Finais
+
+- Variáveis sensíveis (como credenciais do banco) devem ser acessadas por `getenv()` e definidas como variáveis de ambiente no servidor.
+- A arquitetura está pronta para expansão: ideal para APIs de pequeno a médio porte.
+- Recomendado para ambientes como Render, Railway ou servidores com PHP puro habilitado.
 
 
 ---	 
