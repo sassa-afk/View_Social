@@ -210,14 +210,14 @@ As Variáveis sensíveis deste projetos (como credenciais do banco) serão criad
 
 ## Variáveis de Ambiente
 
-	| Variável    | Descrição                     |
-	| ----------- | ----------------------------- |
-	| DB\_NAME    | Nome do banco Postgres        |
-	| DB\_USER    | Usuário do banco              |
-	| DB\_PASS    | Senha do banco                |
-	| DB\_HOST    | Host do banco (ex: localhost) |
-	| DB\_PORT    | Porta do banco (padrão 5432)  |
-	| JWT\_SECRET | Chave secreta para JWT        |
+| Variável    | Descrição                     |
+| ----------- | ----------------------------- |
+| DB\_NAME    | Nome do banco Postgres        |
+| DB\_USER    | Usuário do banco              |
+| DB\_PASS    | Senha do banco                |
+| DB\_HOST    | Host do banco (ex: localhost) |
+| DB\_PORT    | Porta do banco (padrão 5432)  |
+| JWT\_SECRET | Chave secreta para JWT        |
 
 ## Banco de Dados 
 
@@ -228,7 +228,8 @@ Esta aplicação utilizar em sua modelagem o serviço Postgreas, comando de mode
 
 As Criação das tabelas principais do projeto, estruturado e baseado nas tabelas: pessoa, acessos, postagem, comentario
 
--- Tabela pessoa
+-- **Tabela pessoa**
+
 CREATE TABLE IF NOT EXISTS pessoa (
     cpf               VARCHAR(11) PRIMARY KEY,
     nome              VARCHAR(100) NOT NULL,
@@ -240,6 +241,7 @@ CREATE TABLE IF NOT EXISTS pessoa (
 );
 
 -- Tabela acessos
+
 CREATE TABLE IF NOT EXISTS acessos (
     id           SERIAL PRIMARY KEY,
     login        VARCHAR(11) NOT NULL UNIQUE,
@@ -250,6 +252,7 @@ CREATE TABLE IF NOT EXISTS acessos (
 );
 
 -- Tabela postagem
+
 CREATE TABLE IF NOT EXISTS postagem (
     id              SERIAL PRIMARY KEY,
     id_autor        VARCHAR(11),
@@ -262,6 +265,7 @@ CREATE TABLE IF NOT EXISTS postagem (
 );
 
 -- Tabela comentario
+
 CREATE TABLE IF NOT EXISTS comentario (
     id_comentario   SERIAL PRIMARY KEY,
     id_post         INTEGER NOT NULL,
