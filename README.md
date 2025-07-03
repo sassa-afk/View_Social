@@ -30,6 +30,8 @@ Primeiro séra criado uma API que permitira funcionalidades básicas como criaç
 
 - Os postes dos usuários não poderão ser apagados, mas poderão ter sua visualização marcada como false, tornando os dados indisponíveis para o próprio usuário e para os demais usuários.
 
+- Os postes criados não poderam ser editados, mas poderam ficar indisponíveis 
+
 # Projeto disponivel no servidor free Render Deployment
 
 API RESTful em PHP orientada a objetos, projetada para servir postagens com upload e download de arquivos. Deploy simplificado via Render, com autenticação JWT e documentação Swagger integrada.
@@ -221,7 +223,7 @@ As Variáveis sensíveis deste projetos (como credenciais do banco) serão criad
 
 ## Banco de Dados 
 
-Esta aplicação utilizar em sua modelagem o serviço Postgreas, comando de modelagem do banco :
+Esta aplicação utilizar em sua modelagem o serviço Postgreas, seguindo o padrão abaixo de modelagem do banco :
 
 ---
 	psql -U postgres -c "CREATE DATABASE comunidade_1  WITH OWNER = postgres ENCODING = 'UTF8' LC_COLLATE = 'pt_BR.UTF-8' LC_CTYPE = 'pt_BR.UTF-8' TABLESPACE = pg_default CONNECTION LIMIT = -1;"
@@ -232,7 +234,6 @@ As Criação das tabelas principais do projeto, estruturado e baseado nas tabela
 **Tabela pessoa**
 
 ---
-
 	CREATE TABLE IF NOT EXISTS pessoa (
 	    cpf               VARCHAR(11) PRIMARY KEY,
 	    nome              VARCHAR(100) NOT NULL,
@@ -242,13 +243,11 @@ As Criação das tabelas principais do projeto, estruturado e baseado nas tabela
 	    sexo              VARCHAR(15),
 	    funcao_na_empresa VARCHAR(100)
 	);
-
 ---
 
 **Tabela acessos**
 
 ---
-
 	CREATE TABLE IF NOT EXISTS acessos (
 	    id           SERIAL PRIMARY KEY,
 	    login        VARCHAR(11) NOT NULL UNIQUE,
@@ -257,13 +256,11 @@ As Criação das tabelas principais do projeto, estruturado e baseado nas tabela
 
 	    CONSTRAINT acessos_login_fkey FOREIGN KEY (login) REFERENCES pessoa(cpf)
 	);
-
 ---
 
 **Tabela postagem**
 
 ---
-
 	CREATE TABLE IF NOT EXISTS postagem (
 	    id              SERIAL PRIMARY KEY,
 	    id_autor        VARCHAR(11),
@@ -274,13 +271,11 @@ As Criação das tabelas principais do projeto, estruturado e baseado nas tabela
 
 	    CONSTRAINT postagem_id_autor_fkey FOREIGN KEY (id_autor) REFERENCES pessoa(cpf)
 	);
-
 ---
 
 **Tabela comentario**
 
 ---
-
 	CREATE TABLE IF NOT EXISTS comentario (
 	    id_comentario   SERIAL PRIMARY KEY,
 	    id_post         INTEGER NOT NULL,
@@ -291,8 +286,9 @@ As Criação das tabelas principais do projeto, estruturado e baseado nas tabela
 	    CONSTRAINT comentario_id_post_fkey FOREIGN KEY (id_post) REFERENCES postagem(id),
 	    CONSTRAINT comentario_cpf_comentador_fkey FOREIGN KEY (cpf_comentador) REFERENCES pessoa(cpf)
 	);
-
 ---
+
+**DER**
 
 ![image](https://github.com/user-attachments/assets/32119e07-ebb6-4919-b6e0-832d3f3badb4)
 
@@ -321,16 +317,42 @@ Essa imagem fica armazenada na aplicação como fallback para usuários sem avat
 
 ## Rotas Principais
 
+As rotas criadas até o momento estão listadas abaixo de forma simplificada. Toda a documentação detalhada será integrada e disponibilizada por meio do Swagger, cujo link também será incluído neste repositório assim que possível.
 
-| Método | Rota                      | Descrição                                               |
-| ------ | ------------------------- | ------------------------------------------------------- |
-| POST   | `/user/add/newPostFile`   | Adiciona nova postagem com arquivo (upload multipart)   |
-| POST   | `/postes/view/down/file`  | Retorna arquivo para download baseado no ID da postagem |
-| GET    | `/swagger`                | Interface Swagger UI da API                             |
-| ...    | (outras rotas GET, PATCH) | Conforme arquivos em `src/rotas`                        |
+**Rotas GET**
+
+| Rota                        | Descrição                                                                 | Quando usar                          |
+|-----------------------------|---------------------------------------------------------------------------|--------------------------------------|
+| `/usuarios/list/onlyUsers`  | Retorna dados informativos do usuário logado (nome, telefone, etc.)       | Painel de perfil                     |
+| `/postes/view/all`          | Retorna todos os postes criados por todos os usuários (sem arquivos)      | Painel de feed principal             |
+| `/postes/view/limit`        | Retorna os postes limitados conforme número informado (ex: últimos 4)     | Painel de feed principal             |
+| `/postes/view/down/file`    | Verifica se o poste tem arquivo e, se sim, disponibiliza para download    | Feed principal e perfil do usuário   |
+| `/pg/inicio`                | Pagina web inicial ( até o momento sem desenvolvimento)                   | Pagina inical de login               |
+
+**Rotas PATH**
+
+| Rota                        | Descrição                                                                                       | Quando usar         |
+|-----------------------------|-------------------------------------------------------------------------------------------------|---------------------|
+| `/user/update/selfPerfil`   | Atualiza dados do cadastro (nome, telefone, etc). Não permite alterar CPF nem senha             | Painel de perfil    |
+| `/user/update/selfPass`     | Atualiza apenas a senha de acesso                                                               | Painel de perfil    |
+
+**Rotas POST**
+
+| Rota                          | Descrição                                                                                      | Quando usar                          |
+|-------------------------------|------------------------------------------------------------------------------------------------|--------------------------------------|
+| `/user/newUse`                | Adiciona novos usuários (rota pública, sem autenticação JWT)                                   | Página de cadastro                   |
+| `/user/login`                 | Valida login e gera token JWT para uso nas demais rotas protegidas                             | Página inicial / Login               |
+| `/user/add/newPostComentario` | Cria um novo post (sem arquivo) para o usuário logado                                          | Painéis de feed e perfil             |
+| `/user/add/newPostFile`       | Cria um novo post com arquivo (imagem, áudio etc.) para o usuário logado                       | Painéis de feed e perfil             |
 
 
+As rotas do back-end ainda não estão completas. Algumas funcionalidades básicas serão adicionadas nas próximas atualizações do projeto. A seguir, estão listadas as rotas que ainda serão implementadas:
 
+- Comentar um poste
+- Listar todos os comentários de um poste
+- Desativar uma postagem**
+- Visualizar postagens exclusivas de um usuário
 
-## Swagger
+Podera haver também inserção de novas rotas que não estão listadas e as mesmas serão adicionadas as tabelas e ao Swagger.
+
 
