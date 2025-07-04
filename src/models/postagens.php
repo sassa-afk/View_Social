@@ -146,14 +146,10 @@ private function fileDownPost($list) {
             readfile($caminho);
             exit;
         }
-
-        // Erro: não encontrado
-        http_response_code(404);
-        
+        return ['status'=>false , 'data'=>'Arquivo não encontrado no servidor.'];   
     }
 
-    // Erro: não associado
-    http_response_code(400);
+    return ['status' => false, 'data' => 'Arquivo não localizado ou não associado.'];;
     
 }
 
