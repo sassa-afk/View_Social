@@ -66,6 +66,12 @@ private function fileDownPost($list) {
         $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
 
     if (file_exists($caminho)) {
+
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
+        
+        http_response_code(200);
         header('Content-Description: File Transfer');
         header('Content-Type: ' . mime_content_type($caminho));
         header('Content-Disposition: attachment; filename="' . basename($arquivo) . '"');
@@ -73,14 +79,16 @@ private function fileDownPost($list) {
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
         header('Content-Length: ' . filesize($caminho));
+
         flush();
         readfile($caminho);
         exit;
     }
- else {
-            return ['status' => false, 'data' => 'Arquivo não encontrado no servidor.'];
-        }
- 
+    
+    else {
+                return ['status' => false, 'data' => 'Arquivo não encontrado no servidor.'];
+    }
+     
     }
 
     return ['status' => false, 'data' => 'Arquivo não localizado ou não associado.'];
