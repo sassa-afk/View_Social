@@ -66,9 +66,6 @@ private function fileDownPost($list) {
         $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
 
     if (file_exists($caminho)) {
-        // Nada pode ser enviado ao output antes disso
-        if (ob_get_length()) ob_end_clean();
-
         header('Content-Description: File Transfer');
         header('Content-Type: ' . mime_content_type($caminho));
         header('Content-Disposition: attachment; filename="' . basename($arquivo) . '"');
@@ -79,7 +76,8 @@ private function fileDownPost($list) {
         flush();
         readfile($caminho);
         exit;
-    } else {
+    }
+ else {
             return ['status' => false, 'data' => 'Arquivo não encontrado no servidor.'];
         }
  
