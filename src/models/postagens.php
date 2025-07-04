@@ -65,18 +65,21 @@ private function fileDownPost($list) {
         $arquivo = $ret['data'][0]['caminho_arquivo'];
         $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
 
-        if (file_exists($caminho)) {
-            header('Content-Description: File Transfer');
-            header('Content-Type: ' . mime_content_type($caminho)); 
-            header('Content-Disposition: attachment; filename="' . basename($arquivo) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($caminho));
-            flush(); 
-            readfile($caminho);
-            exit;
-        } else {
+    if (file_exists($caminho)) {
+        // Nada pode ser enviado ao output antes disso
+        if (ob_get_length()) ob_end_clean();
+
+        header('Content-Description: File Transfer');
+        header('Content-Type: ' . mime_content_type($caminho));
+        header('Content-Disposition: attachment; filename="' . basename($arquivo) . '"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($caminho));
+        flush();
+        readfile($caminho);
+        exit;
+    } else {
             return ['status' => false, 'data' => 'Arquivo não encontrado no servidor.'];
         }
  
