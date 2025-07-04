@@ -9,7 +9,12 @@ require_once '../src/controllers/controlUser.php'; // <----- crt user
 
 require_once '../src/controllers/controlPostes.php'; // <----- crt user
 
-define('BASE_PATH',  dirname(__DIR__));
+// define('BASE_PATH',  dirname(__DIR__));
+
+if (!defined('BASE_PATH')) {
+    define('BASE_PATH', dirname(__DIR__));
+}
+
 
 $crtUser = new ControlUser();
 

@@ -1,6 +1,10 @@
 <?php
 
-define('BASE_PATH', dirname(__DIR__));
+
+if (!defined('BASE_PATH')) {
+    define('BASE_PATH', dirname(__DIR__));
+}
+
 
 require_once '../src/controllers/controlUser.php';
 require_once '../src/utis/jwt.php';
