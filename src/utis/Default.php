@@ -36,8 +36,8 @@ class FuncoesPadroes {
 	public function executarSeValido ($listBody, callable $callback) {
 
 	    if ($this->valorNull( $listBody) === true) {
-	        $callback($listBody); 
-	        exit;
+	        return $callback($listBody); 
+	        
 	    }
 
 	    $this->returnJSON(401, [
@@ -74,15 +74,13 @@ class FuncoesPadroes {
 	    exit;
 	}
 
-
- 
 	public function condicoesIfReturnJSON ( $condicaoIF , $jsonT , $jsonF ){
-		header('Content-Type: application/json');
 		if( is_callable($condicaoIF)){
 			$condicaoIF = $condicaoIF() ; 
 		}
 
 		if( $condicaoIF ){
+
  		 	http_response_code( 200 );
   		 	echo json_encode( $jsonT );
   		 	exit ;
