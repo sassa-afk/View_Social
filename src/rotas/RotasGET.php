@@ -41,6 +41,7 @@ if ($method === 'GET') {
 
 }
 
+
 header('Content-Type: application/json');
 
 if ($method === 'GET') {
