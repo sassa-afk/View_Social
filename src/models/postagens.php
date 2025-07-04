@@ -108,15 +108,15 @@ private function fileDownPost($list) {
 
             return [
                 'status' => true,
-                'message' => 'Arquivo disponível para download',
+                'data' => $url_publica ,
                 'url' => $url_publica
             ];
         } else {
-            return ['status' => false, 'message' => 'Arquivo não encontrado no servidor.'];
+            return ['status' => false, 'data' => 'Arquivo não encontrado no servidor.'];
         }
     }
 
-    return ['status' => false, 'message' => 'Arquivo não localizado ou não associado.'];
+    return ['status' => false, 'data' => 'Arquivo não localizado ou não associado.'];
 }
 
 
