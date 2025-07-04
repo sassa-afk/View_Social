@@ -1,4 +1,5 @@
 <?php
+ob_start();
 
 require_once '../src/utis/jwt.php';
 require_once '../src/rotas/RotasJWT.php';
@@ -26,22 +27,21 @@ $user = new ControlUser() ;
 $post = new ControlPostes() ;
 
 
+// ----------- PAGINAS && FIles ----------
 
 if ($method === 'GET') {
 
-
-// ----------- PAGINAS && FIles ----------
-
-    header('Content-Type: text/html'); 
-    
     if ($url === '/pg/inicio') {
+	    header('Content-Type: text/html'); 
         http_response_code(200);
         require_once BASE_PATH . '/src/web/pg1.php';
         exit; 
     }
 
+}
 
-// -------------- APIS -------------
+if ($method === 'GET') {
+	// -------------- APIS -------------
 	header('Content-Type: Application/json');
 
     if( $url === '/user/list/self'){
@@ -54,7 +54,7 @@ if ($method === 'GET') {
 		);
     }
 
-// -------------- ativos  -------------
+	// -------------- ativos  -------------
     
     if( $url === '/usuarios/list/onlyUsers'){ // <<< 
     	
@@ -106,7 +106,7 @@ if ($method === 'GET') {
     }
 
 
-// --------------------------------------------------------
+	// --------------------------------------------------------
     if( $url === '/postes/view/down/file'){
 
 
@@ -134,12 +134,10 @@ if ($method === 'GET') {
     // 		$
     // 	]
     
-    // }
-
-
- 
-
+    // 
 }
 
 // OBS : CRIAR ROTA VER USUARIOS REGISTRADOS NO MODEL USUARIOS
+ob_end_flush();
+
 ?>
