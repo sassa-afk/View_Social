@@ -429,42 +429,50 @@
     
     #// ---------------------------------------------------------------7
 
- 
-    "/postes/view/down/file": {
-      "get": {
-        "tags": ["Postagens"],
-        "summary": "--------",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "required": true,
+ "/postes/view/down/file": {
+  "get": {
+    "tags": ["Postagens"],
+    "summary": "Download do arquivo da postagem pelo ID",
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "ID da postagem para download do arquivo"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Arquivo retornado com sucesso",
+        "content": {
+          "*/*": {
             "schema": {
-              "type": "integer"
-            },
-            "description": "Número máximo de postagens a retornar"
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Lista de postagens retornada com sucesso"
-          },
-          "401": {
-            "description": "Token inválido ou ausente"
-          },
-          "400": {
-            "description": "Parâmetro limit ausente ou inválido"
+              "type": "string",
+              "format": "binary"
+            }
           }
         }
+      },
+      "400": {
+        "description": "Parâmetro id ausente ou inválido"
+      },
+      "401": {
+        "description": "Token inválido ou ausente"
+      },
+      "404": {
+        "description": "Arquivo não encontrado"
       }
-    },
+    }
+  }
+}
 
 
   }
