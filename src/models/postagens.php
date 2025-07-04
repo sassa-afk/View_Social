@@ -51,118 +51,32 @@ class Postagens extends  DbPostgress {
 
 	// ************
 
-// private function fileDownPost($list) {
-//     $sql = " 
-//         SELECT caminho_arquivo
-//         FROM postagem
-//         WHERE id = $1
-//     ";
-
-//     $ret = $this->crud_select($sql, [$list[0]]);
-
-//     if ($ret['status'] === true && isset($ret['data'][0]['caminho_arquivo']) && $ret['data'][0]['caminho_arquivo'] !== 'sem arquivo') {
-
-//         $arquivo = $ret['data'][0]['caminho_arquivo'];
-//         $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
-
-//     if (file_exists($caminho)) {
-
-//         if (ob_get_length()) {
-//             ob_end_clean();
-//         }
-
-//         http_response_code(200);
-//         header('Content-Description: File Transfer');
-//         header('Content-Type: ' . mime_content_type($caminho));
-//         header('Content-Disposition: attachment; filename="' . basename($arquivo) . '"');
-//         header('Expires: 0');
-//         header('Cache-Control: must-revalidate');
-//         header('Pragma: public');
-//         header('Content-Length: ' . filesize($caminho));
-
-//         flush();
-//         readfile($caminho);
-//         exit;
-//     }
-    
-//     else {
-//                 return ['status' => false, 'data' => 'Arquivo não encontrado no servidor.'];
-//     }
-     
-//     }
-
-//     return ['status' => false, 'data' => 'Arquivo não localizado ou não associado.'];
-// }
-
-
-    // private function fileDownPost($list) {
-    //     $sql = "SELECT caminho_arquivo FROM postagem WHERE id = $1";
-    //     $ret = $this->crud_select($sql, [$list[0]]);
-
-    //     if ($ret['status'] === true && isset($ret['data'][0]['caminho_arquivo']) && $ret['data'][0]['caminho_arquivo'] !== 'sem arquivo') {
-    //         $arquivo = $ret['data'][0]['caminho_arquivo'];
-    //         $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
-
-    //         if ( file_exists($caminho) ) {
-    //             $url_publica = "https://view-sociald.onrender.com/upload/postagens/" . $arquivo;
-    //             return [ 'status' => true , 'data' => $url_publica ];
-    //         } 
-    //         else {
-    //             return ['status' => false , 'data' => 'Arquivo não encontrado no servidor.'];
-    //         }
-    //     }
-
-    //     return ['status' => false, 'data' => 'Arquivo não localizado ou não associado.'];
-    // }
-
-
-
-
-
-private function fileDownPost($list) {
+    private function fileDownPost($list) {
     $sql = "SELECT caminho_arquivo FROM postagem WHERE id = $1";
     $ret = $this->crud_select($sql, [$list[0]]);
 
-    if ($ret['status'] === true && isset($ret['data'][0]['caminho_arquivo']) && $ret['data'][0]['caminho_arquivo'] !== 'sem arquivo') {
+    if ($ret['status'] === true && 
+        isset($ret['data'][0]['caminho_arquivo']) &&
+        $ret['data'][0]['caminho_arquivo'] !== 'sem arquivo'
+     ){
 
         $arquivo = $ret['data'][0]['caminho_arquivo'];
         $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
 
-        if (file_exists($caminho)) {
-
-                return ['status'=>true , 'data'=>'Arquivo localizado.'];   
-
-            // if (ob_get_length()) {
-            //     ob_end_clean();
-            // }
-
-            // http_response_code(200);
-            // $tipo = mime_content_type($caminho) ?: 'application/octet-stream';
-            // header('Content-Description: File Transfer');
-            // header("Content-Type: $tipo");
-            // header('Content-Disposition: attachment; filename="' . basename($arquivo) . '"');
-            // header('Expires: 0');
-            // header('Cache-Control: must-revalidate');
-            // header('Pragma: public');
-            // header('Content-Length: ' . filesize($caminho));
-            // flush();
-            // readfile($caminho);
-            // exit;
-        }
+        if ( file_exists ( $caminho ) ) {
+                $url_publica = "https://view-sociald.onrender.com/upload/postagens/" . $arquivo;
+                return ['status' => true,  'data' => $url_publica ,   JSON_UNESCAPED_SLASHES];
+        } 
+      
         return ['status'=>false , 'data'=>'Arquivo não encontrado no servidor.'];   
     }
 
-    return ['status' => false, 'data' => 'Arquivo não localizado ou não associado.'];;
-    
-}
-
- 
+    return ['status' => false, 'data' => 'Arquivo não localizado ou não associado.'];;   
+    }
 
 	public function getFileDownPost ( $list ){
 		return $this->fileDownPost( $list );
-	} 
-
-
+    }
     	  
     //--------- POST 
     //--------- PATH

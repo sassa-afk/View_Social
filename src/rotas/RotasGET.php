@@ -121,7 +121,8 @@ if ($method === 'GET') {
     	];
 
     	$def->executarSeValido(
-    		$list , $post->dowFilePost( [$list] ) 
+    		$list ,
+    		$post->dowFilePost($list) 
     	);
     }
 }

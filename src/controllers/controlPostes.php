@@ -38,15 +38,19 @@ class ControlPostes {
 
 	public function dowFilePost( $list ){
 
-		$ret = $this->conx->getFileDownPost( [ $list ]  )  ;
+	 
+		$ret = $this->conx->getFileDownPost($list);
+
 
 		$this->def->condicoesIfReturnJSON ( 
 			$ret['status'] === true ,
-			[ "message" => "Retorno da consulta","data" => $ret['data'][0]['caminho_arquivo'] ] ,
+			[ "message" => "Retorno da consulta","data" => $ret['data'] ] ,
 			[ "message" => "Erro no processo " ,"data" => $ret['data'] ?? null ]
 		); 
 
 	}
+
+
 
 
 }

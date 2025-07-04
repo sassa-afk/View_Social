@@ -451,10 +451,11 @@
       }
     ],
     "responses": {
+
       "200": {
         "description": "Arquivo retornado com sucesso",
         "content": {
-          "*/*": {
+          "application/octet-stream": {
             "schema": {
               "type": "string",
               "format": "binary"
