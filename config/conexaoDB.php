@@ -9,11 +9,19 @@ abstract class DbPostgress {
     // private $port = "5432";
     // private $dbname =  "comunidade_1" ;
 
-    private $pass = getenv('DB_PASS');
-    private $server = getenv('DB_SERVER');
-    private $user = getenv('DB_USER');
-    private $port = getenv('DB_PORT');
-    private $dbname = getenv('DB_NAME');
+    private $pass;
+    private $server;
+    private $user;
+    private $port;
+    private $dbname;
+
+    public function __construct() {
+        $this->pass   = getenv('DB_PASS');
+        $this->server = getenv('DB_SERVER');
+        $this->user   = getenv('DB_USER');
+        $this->port   = getenv('DB_PORT');
+        $this->dbname = getenv('DB_NAME');
+    }
 
     final private function con (){
         $rota = "
