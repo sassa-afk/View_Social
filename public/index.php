@@ -1,7 +1,9 @@
 
 <?php
 
-define('BASE_PATH',  dirname(__DIR__));
+if (!defined('BASE_PATH')) {
+    define('BASE_PATH', dirname(__DIR__));
+}
 
 require BASE_PATH . '/src/rotas/Rotas.php' ;
  
