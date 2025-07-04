@@ -95,25 +95,25 @@ class Postagens extends  DbPostgress {
 // }
 
 
-private function fileDownPost($list) {
-    $sql = "SELECT caminho_arquivo FROM postagem WHERE id = $1";
-    $ret = $this->crud_select($sql, [$list[0]]);
+    private function fileDownPost($list) {
+        $sql = "SELECT caminho_arquivo FROM postagem WHERE id = $1";
+        $ret = $this->crud_select($sql, [$list[0]]);
 
-    if ($ret['status'] === true && isset($ret['data'][0]['caminho_arquivo']) && $ret['data'][0]['caminho_arquivo'] !== 'sem arquivo') {
-        $arquivo = $ret['data'][0]['caminho_arquivo'];
-        $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
+        if ($ret['status'] === true && isset($ret['data'][0]['caminho_arquivo']) && $ret['data'][0]['caminho_arquivo'] !== 'sem arquivo') {
+            $arquivo = $ret['data'][0]['caminho_arquivo'];
+            $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
 
-        if ( file_exists($caminho) ) {
-            $url_publica = "https://view-sociald.onrender.com/upload/postagens/" . $arquivo;
-            return [ 'status' => true , 'data' => $url_publica ];
-        } 
-        else {
-            return ['status' => false , 'data' => 'Arquivo não encontrado no servidor.'];
+            if ( file_exists($caminho) ) {
+                $url_publica = "https://view-sociald.onrender.com/upload/postagens/" . $arquivo;
+                return [ 'status' => true , 'data' => $url_publica ];
+            } 
+            else {
+                return ['status' => false , 'data' => 'Arquivo não encontrado no servidor.'];
+            }
         }
-    }
 
-    return ['status' => false, 'data' => 'Arquivo não localizado ou não associado.'];
-}
+        return ['status' => false, 'data' => 'Arquivo não localizado ou não associado.'];
+    }
 
 
 

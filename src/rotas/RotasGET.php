@@ -117,7 +117,7 @@ if ($method === 'GET') {
      	$def->validaCampoObrigatorio( $id_postagem );
 
     	$list =[
-     		$id_postagem , 
+     		$id_postagem 
     	];
 
     	$def->executarSeValido(
