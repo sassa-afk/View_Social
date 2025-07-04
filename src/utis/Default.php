@@ -80,12 +80,12 @@ class FuncoesPadroes {
 		}
 
 		if( $condicaoIF ){
-
+			header('Content-Type: application/json');
  		 	http_response_code( 200 );
   		 	echo json_encode( $jsonT );
   		 	exit ;
 		}
-
+		header('Content-Type: application/json');
   		http_response_code( 500 );
 		echo json_encode( $jsonF );
 		exit ; 
