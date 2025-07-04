@@ -20,7 +20,7 @@ $body = json_decode(
 	true
 );
 
-header('Content-Type: application/json'); 
+// header('Content-Type: application/json'); 
 
 $method = $_SERVER['REQUEST_METHOD'];
 
