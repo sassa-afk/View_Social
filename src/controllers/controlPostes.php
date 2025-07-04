@@ -38,10 +38,8 @@ class ControlPostes {
 
 	public function dowFilePost( $list ){
 
-		$ret = $this->conx->getFileDownPost( $list  )  ;
+		$ret = $this->conx->getFileDownPost( [ $list ]  )  ;
 
-		// echo json_encode( ["valusse" => $list[0]] );
-		// exit ;
 		$this->def->condicoesIfReturnJSON ( 
 			$ret['status'] === true ,
 			[ "message" => "Retorno da consulta","data" => $ret['data'][0]['caminho_arquivo'] ] ,
@@ -49,35 +47,6 @@ class ControlPostes {
 		); 
 
 	}
-
-
-	// public function listAllPostSelf ($list){
-
-	// 	$ret = $this->conx->getListAllPostSelf( $list );
-
-  	// 	 if( $ret['status'] === true  ){
-  	// 	 	http_response_code( 200 );
-  	// 	 	echo json_encode([
-	//  			"message" => "Retorno da consulta ex" ,
-  	// 	 		"data" => $ret['data']
-  	// 	 	 ]);
-  	// 	 	exit ;
-  	// 	 }
-
-  	// 	http_response_code( 500 );
-	// 	echo json_encode([
-	// 		"message" => "Erro no processo " ,
-	// 		"data" => $ret['data']
-	// 	 ]);
-	// 	exit ;
-
-	// }
-
-
-
- 
- 
-
 
 
 }

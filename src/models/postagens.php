@@ -103,15 +103,12 @@ private function fileDownPost($list) {
         $arquivo = $ret['data'][0]['caminho_arquivo'];
         $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
 
-        if (file_exists($caminho)) {
+        if ( file_exists($caminho) ) {
             $url_publica = "https://view-sociald.onrender.com/upload/postagens/" . $arquivo;
-
-            return [
-                'status' => true,
-                'data' => $url_publica ,
-             ];
-        } else {
-            return ['status' => false, 'data' => 'Arquivo não encontrado no servidor.'];
+            return [ 'status' => true , 'data' => $url_publica ];
+        } 
+        else {
+            return ['status' => false , 'data' => 'Arquivo não encontrado no servidor.'];
         }
     }
 
