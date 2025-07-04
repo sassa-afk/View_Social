@@ -67,19 +67,19 @@ private function fileDownPost($list) {
 
         if (file_exists($caminho)) {
             header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
+            header('Content-Type: ' . mime_content_type($caminho)); 
             header('Content-Disposition: attachment; filename="' . basename($arquivo) . '"');
             header('Expires: 0');
             header('Cache-Control: must-revalidate');
             header('Pragma: public');
             header('Content-Length: ' . filesize($caminho));
- 
+            flush(); 
             readfile($caminho);
             exit;
         } else {
             return ['status' => false, 'data' => 'Arquivo não encontrado no servidor.'];
         }
-
+ 
     }
 
     return ['status' => false, 'data' => 'Arquivo não localizado ou não associado.'];
