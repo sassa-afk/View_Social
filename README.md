@@ -32,19 +32,16 @@ Primeiro séra criado uma API que permitira funcionalidades básicas como criaç
 
 - Os postes criados não poderam ser editados, mas poderam ficar indisponíveis 
 
-# Projeto disponível no Render (Plano Gratuito)
+# Projeto disponivel no servidor free Render Deployment
 
-**API RESTful desenvolvida em PHP (orientada a objetos)**, com foco em postagens que envolvem upload e download de arquivos. A aplicação está hospedada na plataforma **Render**, utilizando autenticação via **JWT** e documentação interativa com **Swagger**.
----
 
-## Acesso à API Documentada
+API RESTful em PHP orientada a objetos, projetada para servir postagens com upload e download de arquivos. Deploy simplificado via Render, com autenticação JWT e documentação Swagger integrada.
 
 Acesse a documentação Swagger com todas as rotas implementadas até o momento:  
 [https://view-sociald.onrender.com/swagger/](https://view-sociald.onrender.com/swagger/)
 
----
 
-## Importante
+**obs:**
 
 Este projeto está hospedado em um **servidor gratuito Render**, o qual entra em **modo de hibernação (sleep mode)** após um período de inatividade.
 
