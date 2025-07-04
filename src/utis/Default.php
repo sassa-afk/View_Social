@@ -29,7 +29,7 @@ class FuncoesPadroes {
 	// Retorno josn status 
 	public function returnJSON ( $cod , $descricaoRetorno  ){
 		http_response_code( $cod );
-		echo json_encode( $descricaoRetorno );
+		echo json_encode( $descricaoRetorno , JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );
 		exit;
 	} 
 	// Valida o body e executa a função, se for válido.
@@ -84,13 +84,13 @@ class FuncoesPadroes {
 		if( $condicaoIF ){
 			header('Content-Type: application/json');
  		 	http_response_code( 200 );
-  		 	echo json_encode( $jsonT );
+  		 	echo json_encode( $jsonT , JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );
   		 	exit ;
 		}
 
 		header('Content-Type: application/json');
   		http_response_code( 500 );
-		echo json_encode( $jsonF );
+		echo json_encode( $jsonF , JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );
 		exit ; 
 	}
 

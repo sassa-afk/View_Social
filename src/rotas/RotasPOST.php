@@ -64,7 +64,7 @@ if($method === 'POST'){
 		    $nome,
 		    $email,
 		    $telefone,
-		    "padrao vais ser",
+		    "user.png",
 		    $sexo,
 		    $funcao_na_empresa,
 		    $senhaHash
@@ -134,10 +134,6 @@ if($method === 'POST'){
 			$list  , $user->addPostFile($list)
 		);
 	}
-
-	
-
-
 
 }
 

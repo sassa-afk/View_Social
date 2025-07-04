@@ -11,8 +11,11 @@ require BASE_PATH . '/src/rotas/RotasPATCH.php';
 $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method !== 'GET' && $method !== 'POST' && $method !== 'PATCH') {
+	http_response_code( 404 );
+	header('Content-Type: application/json');
     echo json_encode([
-        "message" => "rota apontada nao configurada ate o momento"
+        "message" => "rota apontada nao configurada ate o momento" , 
+        JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
     ]);
     exit;
 }

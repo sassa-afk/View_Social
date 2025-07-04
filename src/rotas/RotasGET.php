@@ -7,10 +7,8 @@ require_once '../src/utis/jwt.php';
 require_once '../src/rotas/RotasJWT.php';
 require_once '../src/utis/Default.php';
 require_once '../src/controllers/controlUser.php'; // <----- crt user
+require_once '../src/controllers/controlPostes.php'; // <----- crt post
 
-require_once '../src/controllers/controlPostes.php'; // <----- crt user
-
-// define('BASE_PATH',  dirname(__DIR__));
 
 if (!defined('BASE_PATH')) {
     define('BASE_PATH', dirname(__DIR__));
@@ -122,24 +120,12 @@ if ($method === 'GET') {
      		$id_postagem , 
     	];
 
-    	// echo json_encode([ "msf" =>"ss"]);
-    	// exit ;
-
     	$def->executarSeValido(
     		$list , $post->dowFilePost( $list ) 
     	);
     }
-
-    // if( $url === '/postes/view/selfPost'){
-    // 	$auth = $aut->validaHeadToken();
-    // 	$list = [
-    // 		$
-    // 	]
-    
-    // 
 }
 
-// OBS : CRIAR ROTA VER USUARIOS REGISTRADOS NO MODEL USUARIOS
 ob_end_flush();
 
 ?>

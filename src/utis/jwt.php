@@ -1,6 +1,4 @@
 <?php
-
-
 class AuthJWT { 
 
  
@@ -41,17 +39,14 @@ class AuthJWT {
     		return [
     			'valido' => false ,
     			'error' => 'Token malformado'
-    		];
+    		]; 
     	}
-
     	list($b64Header, $b64Payload, $b64Assinatura) = $token_dividido;
-    	
     	$assinaturaCheck = hash_hmac(
     		'sha256', 
     		"$b64Header.$b64Payload", 
     		$this->chave, true
     	);
-		
 		$assinaturaCheckEncoded = $this->base64url_encode($assinaturaCheck);
 
         if ($b64Assinatura !== $assinaturaCheckEncoded) {
@@ -69,16 +64,13 @@ class AuthJWT {
                 'erro' => 'Token expirado'
             ];
         }
-
         return [
             'valido' => true,
             'dados' => $payload ,
             'cpf' => $payload['cpf']
         ];
     }
-
 // -----------------------------------------------------------------
-
     public function postNewTk( $payload ){
     	$token = $this->newToken($payload);
         return $this->newToken($payload);
@@ -87,11 +79,5 @@ class AuthJWT {
     public function getValidaTk( $token ){
     	return $this->validaToken($token);
     }
-
-
 } 
-
-
-
-
 ?>
