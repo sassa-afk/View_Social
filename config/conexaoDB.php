@@ -76,22 +76,37 @@ abstract class DbPostgress {
 
         }
     }
+ 
 
-    final protected function crud_edit ( $sql , $prn ){
-
+    final protected function crud_edit($sql, $prn) {
         $conn = $this->con();
-        $res = pg_query_params( $conn , $sql , $prn);
-        $linhasAfetadas = pg_affected_rows($res);
+        $res = pg_query_params($conn, $sql, $prn);
 
-        if( $linhasAfetadas > 0 ){
-            pg_close($conn);
-            return ['status'=> true , 'data' => $linhasAfetadas  ] ;
-        }else{
+        if (!$res) {
             $er = pg_last_error($conn); 
             pg_close($conn);
-            return ['status'=> false , 'data' => $er ] ;
+            return ['status' => false, 'data' => $er ];
         }
+
+        $linhasAfetadas = pg_affected_rows($res);
+        $row = pg_fetch_assoc($res);
+
+        $retornoCompleto = "Editado $linhasAfetadas linha(s)";
+
+        $id = isset($row['id']) ? $row['id'] : null;
+
+        if ($id !== null) {
+            $retornoCompleto = $retornoCompleto . " | ID registrado: $id";
+        }
+
+        pg_close($conn);
+
+        return ['status' => true, 'data' => $retornoCompleto];
     }
+
+
+
+
 
     final protected function crud_edit_commit ($xCommit,$vetorSql=[],$vatorParam=[]){
         $conm = $this->con();

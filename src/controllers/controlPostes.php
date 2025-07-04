@@ -15,6 +15,8 @@ class ControlPostes {
         $this->def = new FuncoesPadroes() ;
     }
 
+    //--------- GET
+
 	public function  listAllPost ( ) {
 		$ret = $this->conx->getListAllPostes();
 
@@ -49,6 +51,8 @@ class ControlPostes {
 		); 
 
 	}
+	//--------- PATH
+    //--------- POST
 
 
 

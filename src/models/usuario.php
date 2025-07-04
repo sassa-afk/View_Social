@@ -21,7 +21,7 @@ require_once '../src/utis/Default.php';
     // }
 
 
-// ------ ativo 
+// ------ ativo   
 
     private function add ( $list ){
 		$sqls = [
@@ -113,7 +113,8 @@ require_once '../src/utis/Default.php';
 		        'sem arquivo',
 		        $2,
 		        true
-		    );
+		    )
+		    RETURNING id
 		";
 
 		return  $this->crud_edit($sql, $param);
@@ -146,42 +147,38 @@ require_once '../src/utis/Default.php';
 	public function getOnlyUsers ( $list ) {
 		return $this->onlyUsers( $list ) ;
 	}
-	// *************************
+	
+	// *************************  
 	private function newPostFile( $list) {
 
-		// echo json_encode(['value' => $list[0] ]);
-		// exit ;
-
-
 	    try {
-	        $id = $list[0];   // ID do autor
-	        $legenda = $list[1]; // Legenda enviada
+	        $id = $list[0];   
+	        $legenda = $list[1];  
 	        $file = $list[2]; 
-	        $cpf = $list[3];  // CPF, se estiver usando como parte do nome
+	        $cpf = $list[3];   
 
 	        $extensao = pathinfo($file['name'], PATHINFO_EXTENSION);
 	        $novoNome = $cpf . "_" . $id . "_" . time() . "." . $extensao;
-
 	        $destino = __DIR__ . '/../../public/upload/postagens/' . $novoNome;
-
- 
 
 	        if ( move_uploaded_file($file['tmp_name'], $destino)) {
 	            $param = [$id, $legenda, $novoNome];
 
-	            $sql = "
-	                INSERT INTO postagem (
-	                    id_autor,
-	                    caminho_arquivo,
-	                    legenda,
-	                    ativo
-	                ) VALUES (
-	                    $1,
-	                    $3,
-	                    $2,
-	                    true
-	                );
-	            ";
+				$sql = "
+				    INSERT INTO postagem (
+				        id_autor,
+				        caminho_arquivo,
+				        legenda,
+				        ativo
+				    ) VALUES (
+				        $1,
+				        $3,
+				        $2,
+				        true
+				    )
+				    RETURNING id
+				";
+
 
 	            return $this->crud_edit($sql, $param);     
 	        } else {
@@ -197,6 +194,7 @@ require_once '../src/utis/Default.php';
 		return $this->newPostFile ( $list );
 	} 
 
+	// *************************
 
 
 } 

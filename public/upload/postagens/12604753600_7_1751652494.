@@ -1,0 +1,25 @@
+paletas de cores javax.awt
+
+// Branco
+Color branco = new Color(255, 255, 255);
+
+// Cinza claro
+Color cinzaClaro = new Color(211, 211, 211);
+
+// Dourado
+Color dourado = new Color(255, 215, 0);
+
+// Vermelho escuro
+Color vermelhoEscuro = new Color(139, 0, 0);
+
+// Azul Royal
+Color azulRoyal = new Color(65, 105, 225);
+
+
+
+ 		
+new Color(255, 200, 100) // Laranja claro
+new Color(255, 182, 193) // Rosa claro
+new Color(255, 192, 203) // Rosa mais claro
+new Color(173, 216, 230) // Azul claro
+new Color(255, 228, 240) // Rosa muito claro
