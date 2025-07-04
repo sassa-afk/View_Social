@@ -32,9 +32,33 @@ Primeiro séra criado uma API que permitira funcionalidades básicas como criaç
 
 - Os postes criados não poderam ser editados, mas poderam ficar indisponíveis 
 
-# Projeto disponivel no servidor free Render Deployment
+# Projeto disponível no Render (Plano Gratuito)
 
-API RESTful em PHP orientada a objetos, projetada para servir postagens com upload e download de arquivos. Deploy simplificado via Render, com autenticação JWT e documentação Swagger integrada.
+**API RESTful desenvolvida em PHP (orientada a objetos)**, com foco em postagens que envolvem upload e download de arquivos. A aplicação está hospedada na plataforma **Render**, utilizando autenticação via **JWT** e documentação interativa com **Swagger**.
+---
+
+## Acesso à API Documentada
+
+Acesse a documentação Swagger com todas as rotas implementadas até o momento:  
+[https://view-sociald.onrender.com/swagger/](https://view-sociald.onrender.com/swagger/)
+
+---
+
+## Importante
+
+Este projeto está hospedado em um **servidor gratuito Render**, o qual entra em **modo de hibernação (sleep mode)** após um período de inatividade.
+
+- O **primeiro acesso após o modo sleep** pode levar alguns segundos ou minutos extras.
+- Após o servidor ser reativado, todas as requisições funcionam normalmente.
+
+Além disso:
+
+- Arquivos enviados através das rotas de upload ficam temporariamente disponíveis para acesso direto via link público **enquanto o servidor estiver ativo**.
+- Caso o servidor entre novamente em modo sleep, os arquivos ainda existem, porém o link pode **não estar mais acessível imediatamente** até nova reativação.
+
+---
+
+Sinta-se à vontade para testar a aplicação!
 
 ---
 
@@ -49,17 +73,13 @@ API RESTful em PHP orientada a objetos, projetada para servir postagens com uplo
 - [Armazenamento de Arquivos](#armazenamento-de-arquivos)  
 - [Rotas Principais](#rotas-principais)  
 - [Swagger](#swagger)  
-- [Licença](#licença)
+ 
 
 
 
 ## Tecnologias
 
-- PHP 8+ (Built-in Server para desenvolvimento)
-- PostgreSQL como banco de dados
-- JWT para autenticação e segurança
-- Swagger para documentação interativa da API
-- Deploy na plataforma Render.com (Free tier)
+. PHP · PostgreSQL · JWT · CURL · Apache · Docker · Swagger · React (frontend em desenvolvimento) . Render.com (Free tier)
 
 ## Estrutura do Projeto
 
@@ -350,9 +370,12 @@ As rotas do back-end ainda não estão completas. Algumas funcionalidades básic
 
 - Comentar um poste
 - Listar todos os comentários de um poste
-- Desativar uma postagem**
+- Desativar uma postagem
 - Visualizar postagens exclusivas de um usuário
 
 Podera haver também inserção de novas rotas que não estão listadas e as mesmas serão adicionadas as tabelas e ao Swagger.
 
+## Swagger
+
+A documentação das rotas criadas estão disponiveis no link https://view-sociald.onrender.com/swagger/#
 
