@@ -19,3 +19,12 @@ RUN chown -R www-data:www-data /var/www/html/public/upload
 # Expõe a porta padrão
 EXPOSE 80
 
+RUN echo "display_errors = Off" >> /usr/local/etc/php/conf.d/docker-php-production.ini \
+ && echo "display_startup_errors = Off" >> /usr/local/etc/php/conf.d/docker-php-production.ini \
+ && echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-php-production.ini \
+ && echo "error_log = /var/log/php_errors.log" >> /usr/local/etc/php/conf.d/docker-php-production.ini
+
+
+RUN echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-php-production.ini \
+ && echo "error_log = /var/log/php_errors.log" >> /usr/local/etc/php/conf.d/docker-php-production.ini
+

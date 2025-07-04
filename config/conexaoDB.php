@@ -34,11 +34,6 @@ abstract class DbPostgress {
         $con = pg_connect($rota); 
         if(!$con){
             return false ;
-             //  json_decode(['status'=> false , 'message' => 'Erro 500 ']  )
-             // exit ;
-
-            // return ['status'=> false , 'message' => 'Erro 500 '] ;
-            // exit;
         }else{
             return $con ;
         }
@@ -81,7 +76,7 @@ abstract class DbPostgress {
         pg_close($con); 
         
         if( $res ){
-            return [  'status' => true , 'data' => $res ];
+            return [ 'status' => true , 'data' => $res ];
         }else{
 
             return ['status' => true , 'data' => '[]' ];

@@ -3,8 +3,8 @@
 
 class AuthJWT { 
 
-
-    private static $chave = 'chave_muito_secreta';
+ 
+    private $chave = 'chave_muito_secreta';
 // -----------------------------------------------------------------
     private  function base64url_encode($data) {
         return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
@@ -80,12 +80,6 @@ class AuthJWT {
 // -----------------------------------------------------------------
 
     public function postNewTk( $payload ){
-    	//payload = ([
-    	//'uid' => 1,
-    	//'nome' => 'Lucas',
-    	// 'exp' => time() + 3600
-    	// ]);
-        // return  json_encode([ "mesage" => "olamundo"]);
     	$token = $this->newToken($payload);
         return $this->newToken($payload);
     }
