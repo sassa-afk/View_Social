@@ -429,10 +429,11 @@
     
     #// ---------------------------------------------------------------7
 
+ 
  "/postes/view/down/file": {
   "get": {
     "tags": ["Postagens"],
-    "summary": "Download do arquivo da postagem pelo ID",
+    "summary": "Download do arquivo da postagem",
     "security": [
       {
         "bearerAuth": []
@@ -446,7 +447,7 @@
         "schema": {
           "type": "integer"
         },
-        "description": "ID da postagem para download do arquivo"
+        "description": "ID do arquivo para download"
       }
     ],
     "responses": {
@@ -461,14 +462,11 @@
           }
         }
       },
-      "400": {
-        "description": "Parâmetro id ausente ou inválido"
-      },
       "401": {
         "description": "Token inválido ou ausente"
       },
-      "404": {
-        "description": "Arquivo não encontrado"
+      "400": {
+        "description": "Parâmetro limit ausente ou inválido"
       }
     }
   }
