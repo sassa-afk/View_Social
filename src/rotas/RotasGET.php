@@ -40,9 +40,9 @@ if ($method === 'GET') {
 
 }
 
+header('Content-Type: Application/json');
 if ($method === 'GET') {
 	// -------------- APIS -------------
-	header('Content-Type: Application/json');
 
     if( $url === '/user/list/self'){
 
