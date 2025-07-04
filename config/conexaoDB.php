@@ -3,17 +3,17 @@
 require_once '../src/utis/Default.php';
 
 abstract class DbPostgress {
-    private $pass ="GORfVobKcoWeSbPONxxXQN9bswCj7vCk";
-    private $server = "dpg-d19fbfeuk2gs73dfsqk0-a.oregon-postgres.render.com";
-    private $user = "sassa";
-    private $port = "5432";
-    private $dbname =  "comunidade_1" ;
+    // private $pass ="GORfVobKcoWeSbPONxxXQN9bswCj7vCk";
+    // private $server = "dpg-d19fbfeuk2gs73dfsqk0-a.oregon-postgres.render.com";
+    // private $user = "sassa";
+    // private $port = "5432";
+    // private $dbname =  "comunidade_1" ;
 
-    // private $pass = getenv('DB_PASS');
-    // private $server = getenv('DB_SERVER');
-    // private $user = getenv('DB_USER');
-    // private $port = getenv('DB_PORT');
-    // private $dbname = getenv('DB_NAME');
+    private $pass = getenv('DB_PASS');
+    private $server = getenv('DB_SERVER');
+    private $user = getenv('DB_USER');
+    private $port = getenv('DB_PORT');
+    private $dbname = getenv('DB_NAME');
 
     final private function con (){
         $rota = "
@@ -35,6 +35,8 @@ abstract class DbPostgress {
             return $con ;
         }
     }
+
+
 
     final protected function crud_select( $sql, $prn) {
         $con = $this->con();

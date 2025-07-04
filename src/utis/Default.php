@@ -34,6 +34,8 @@ class FuncoesPadroes {
 	} 
 	// Valida o body e executa a função, se for válido.
 	public function executarSeValido ($listBody, callable $callback) {
+		header('Content-Type: application/json');
+
 
 	    if ($this->valorNull( $listBody) === true) {
 	        return $callback($listBody); 
@@ -85,6 +87,7 @@ class FuncoesPadroes {
   		 	echo json_encode( $jsonT );
   		 	exit ;
 		}
+
 		header('Content-Type: application/json');
   		http_response_code( 500 );
 		echo json_encode( $jsonF );
