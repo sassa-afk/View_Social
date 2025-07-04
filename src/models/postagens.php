@@ -109,8 +109,7 @@ private function fileDownPost($list) {
             return [
                 'status' => true,
                 'data' => $url_publica ,
-                'url' => $url_publica
-            ];
+             ];
         } else {
             return ['status' => false, 'data' => 'Arquivo não encontrado no servidor.'];
         }
