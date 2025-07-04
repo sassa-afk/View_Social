@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Se o arquivo não existir
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Se a pasta não existir
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redireciona tudo para index.php
+RewriteRule ^ index.php [QSA,L]
