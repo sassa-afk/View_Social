@@ -66,7 +66,7 @@ abstract class DbPostgress {
         $result = pg_query_params($this->con(), $sql, $prn);
         $con = $this->con();
         
-        if(!result){
+        if(!$result){
             $er = pg_last_error( $con );
             pg_close($con); 
             return ['status' => false , 'data' => $er] ;
