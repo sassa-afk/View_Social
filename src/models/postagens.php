@@ -129,22 +129,25 @@ private function fileDownPost($list) {
         $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
 
         if (file_exists($caminho)) {
-            if (ob_get_length()) {
-                ob_end_clean();
-            }
 
-            http_response_code(200);
-            $tipo = mime_content_type($caminho) ?: 'application/octet-stream';
-            header('Content-Description: File Transfer');
-            header("Content-Type: $tipo");
-            header('Content-Disposition: attachment; filename="' . basename($arquivo) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($caminho));
-            flush();
-            readfile($caminho);
-            exit;
+                return ['status'=>true , 'data'=>'Arquivo localizado.'];   
+
+            // if (ob_get_length()) {
+            //     ob_end_clean();
+            // }
+
+            // http_response_code(200);
+            // $tipo = mime_content_type($caminho) ?: 'application/octet-stream';
+            // header('Content-Description: File Transfer');
+            // header("Content-Type: $tipo");
+            // header('Content-Disposition: attachment; filename="' . basename($arquivo) . '"');
+            // header('Expires: 0');
+            // header('Cache-Control: must-revalidate');
+            // header('Pragma: public');
+            // header('Content-Length: ' . filesize($caminho));
+            // flush();
+            // readfile($caminho);
+            // exit;
         }
         return ['status'=>false , 'data'=>'Arquivo não encontrado no servidor.'];   
     }
