@@ -30,24 +30,23 @@ $post = new ControlPostes() ;
 
 // ----------- PAGINAS && FIles ----------
 
-if ($method === 'GET') {
+// if ($method === 'GET') {
 
-    if ($url === '/pg/inicio') {
-	    header('Content-Type: text/html'); 
-        http_response_code(200);
-        require_once BASE_PATH . '/src/web/pg1.php';
-        exit; 
-    }
+//     if ($url === '/pg/inicio') {
+// 	    header('Content-Type: text/html'); 
+//         http_response_code(200);
+//         require_once BASE_PATH . '/src/web/pg1.php';
+//         exit; 
+//     }
 
-}
+// }
 
-
-header('Content-Type: application/json');
 
 if ($method === 'GET') {
 	// -------------- APIS -------------
 
     if( $url === '/user/list/self'){
+
 
 		$auth = $aut->validaHeadToken(); 
 		$list = [$auth['cpf']] ; 

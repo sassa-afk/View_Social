@@ -18,6 +18,8 @@ class ControlPostes {
 	public function  listAllPost ( ) {
 		$ret = $this->conx->getListAllPostes();
 
+		header('Content-Type: application/json');
+		
 		$this->def->condicoesIfReturnJSON (
 			$ret['status'] === true ,
 			[ "message" => "Retorno da consulta" ,"data" => $ret['data'] ?? null ] ,
