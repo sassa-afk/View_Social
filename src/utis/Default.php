@@ -75,20 +75,9 @@ class FuncoesPadroes {
 	}
 
 
-
-/**
-	 * Avalia uma condição (bool ou função) e retorna um JSON conforme o resultado.
-	 *
-	 * @param bool|callable $condicaoIf Condição direta ou função que retorna bool.
-	 * @param array $jsonTrue Array convertido em JSON se condição for true.
-	 * @param array $jsonFalse Array convertido em JSON se condição for false.
-	 *
- * @return string JSON com o resultado baseado na condição.
- */
-
-
  
 	public function condicoesIfReturnJSON ( $condicaoIF , $jsonT , $jsonF ){
+		header('Content-Type: application/json');
 		if( is_callable($condicaoIF)){
 			$condicaoIF = $condicaoIF() ; 
 		}

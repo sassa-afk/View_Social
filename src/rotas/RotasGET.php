@@ -21,6 +21,7 @@ $crtUser = new ControlUser();
 
 $method = $_SERVER['REQUEST_METHOD'];
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
 $def = new FuncoesPadroes();
 $aut = new AuxJWT();
 $user = new ControlUser() ;
@@ -40,7 +41,8 @@ if ($method === 'GET') {
 
 }
 
-header('Content-Type: Application/json');
+header('Content-Type: application/json');
+
 if ($method === 'GET') {
 	// -------------- APIS -------------
 
