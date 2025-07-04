@@ -95,70 +95,70 @@ class Postagens extends  DbPostgress {
 // }
 
 
-// private function fileDownPost($list) {
-//     $sql = "SELECT caminho_arquivo FROM postagem WHERE id = $1";
-//     $ret = $this->crud_select($sql, [$list[0]]);
-
-//     if ($ret['status'] === true && isset($ret['data'][0]['caminho_arquivo']) && $ret['data'][0]['caminho_arquivo'] !== 'sem arquivo') {
-//         $arquivo = $ret['data'][0]['caminho_arquivo'];
-//         $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
-
-//         if (file_exists($caminho)) {
-//             $url_publica = "https://view-sociald.onrender.com/upload/postagens/" . $arquivo;
-
-//             return [
-//                 'status' => true,
-//                 'message' => 'Arquivo disponível para download',
-//                 'url' => $url_publica
-//             ];
-//         } else {
-//             return ['status' => false, 'message' => 'Arquivo não encontrado no servidor.'];
-//         }
-//     }
-
-//     return ['status' => false, 'message' => 'Arquivo não localizado ou não associado.'];
-// }
-
-
-
-
 private function fileDownPost($list) {
     $sql = "SELECT caminho_arquivo FROM postagem WHERE id = $1";
     $ret = $this->crud_select($sql, [$list[0]]);
 
     if ($ret['status'] === true && isset($ret['data'][0]['caminho_arquivo']) && $ret['data'][0]['caminho_arquivo'] !== 'sem arquivo') {
-
         $arquivo = $ret['data'][0]['caminho_arquivo'];
         $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
 
         if (file_exists($caminho)) {
-            if (ob_get_length()) {
-                ob_end_clean();
-            }
+            $url_publica = "https://view-sociald.onrender.com/upload/postagens/" . $arquivo;
 
-            http_response_code(200);
-            $tipo = mime_content_type($caminho) ?: 'application/octet-stream';
-            header('Content-Description: File Transfer');
-            header("Content-Type: $tipo");
-            header('Content-Disposition: attachment; filename="' . basename($arquivo) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($caminho));
-            flush();
-            readfile($caminho);
-            exit;
+            return [
+                'status' => true,
+                'message' => 'Arquivo disponível para download',
+                'url' => $url_publica
+            ];
+        } else {
+            return ['status' => false, 'message' => 'Arquivo não encontrado no servidor.'];
         }
-
-        // Erro: não encontrado
-        http_response_code(404);
-        exit;
     }
 
-    // Erro: não associado
-    http_response_code(400);
-    exit;
+    return ['status' => false, 'message' => 'Arquivo não localizado ou não associado.'];
 }
+
+
+
+
+// private function fileDownPost($list) {
+//     $sql = "SELECT caminho_arquivo FROM postagem WHERE id = $1";
+//     $ret = $this->crud_select($sql, [$list[0]]);
+
+//     if ($ret['status'] === true && isset($ret['data'][0]['caminho_arquivo']) && $ret['data'][0]['caminho_arquivo'] !== 'sem arquivo') {
+
+//         $arquivo = $ret['data'][0]['caminho_arquivo'];
+//         $caminho = __DIR__ . '/../../public/upload/postagens/' . $arquivo;
+
+//         if (file_exists($caminho)) {
+//             if (ob_get_length()) {
+//                 ob_end_clean();
+//             }
+
+//             http_response_code(200);
+//             $tipo = mime_content_type($caminho) ?: 'application/octet-stream';
+//             header('Content-Description: File Transfer');
+//             header("Content-Type: $tipo");
+//             header('Content-Disposition: attachment; filename="' . basename($arquivo) . '"');
+//             header('Expires: 0');
+//             header('Cache-Control: must-revalidate');
+//             header('Pragma: public');
+//             header('Content-Length: ' . filesize($caminho));
+//             flush();
+//             readfile($caminho);
+//             exit;
+//         }
+
+//         // Erro: não encontrado
+//         http_response_code(404);
+//         exit;
+//     }
+
+//     // Erro: não associado
+//     http_response_code(400);
+//     exit;
+// }
 
 
 	public function getFileDownPost ( $list ){
