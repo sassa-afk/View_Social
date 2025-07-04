@@ -1,30 +1,27 @@
 FROM php:8.1-apache
 
-# Instala extensões PHP necessárias para MySQL e PostgreSQL
+# Instala extensões PHP necessárias
 RUN apt-get update && apt-get install -y libpq-dev \
     && docker-php-ext-install mysqli pdo pdo_mysql pgsql pdo_pgsql
 
 # Ativa módulo de rewrite do Apache
 RUN a2enmod rewrite
 
-# Ajusta DocumentRoot para apontar para a pasta /public
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
-
-# Copia o projeto pro container
+# Copia os arquivos antes de alterar DocumentRoot
 COPY . /var/www/html/
 
-# Permissões (ajuste se tiver uploads)
+# Ajusta DocumentRoot para /public (DEPOIS do COPY!)
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
+
+# Ajusta permissões (upload de arquivos)
 RUN chown -R www-data:www-data /var/www/html/public/upload
 
-# Expõe a porta padrão
-EXPOSE 80
-
+# Configura erros e log
 RUN echo "display_errors = Off" >> /usr/local/etc/php/conf.d/docker-php-production.ini \
  && echo "display_startup_errors = Off" >> /usr/local/etc/php/conf.d/docker-php-production.ini \
  && echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-php-production.ini \
  && echo "error_log = /var/log/php_errors.log" >> /usr/local/etc/php/conf.d/docker-php-production.ini
 
-
-RUN echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-php-production.ini \
- && echo "error_log = /var/log/php_errors.log" >> /usr/local/etc/php/conf.d/docker-php-production.ini
+# Expõe a porta padrão
+EXPOSE 80
 
