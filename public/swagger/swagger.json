@@ -34,40 +34,7 @@
     },
   
   "paths" : {
-    #// ---------------------------------------------------------------
 
-     "/user/login" : {
-      "post": {
-         "tags": ["Usuários"],
-        "summary": "Endpoint de login ",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user": { "type": "string" },
-                  "pass": { "type": "string" }
-                },
-                "required": ["user", "pass"]
-              }
-            }
-          }
-        },
-
-        "responses": {
-          "200": {
-            "description": "Login bem-sucedido ",
-            "data" : "teste"
-          },
-          "401": {
-            "description": "Falha na autenticação"
-          }
-        }
-
-      }
-    } ,
 
     #// ---------------------------------------------------------------
 
@@ -75,7 +42,7 @@
 
       "post": {
          "tags": ["Usuários"],
-        "summary": "Adicionar novos acessos",
+        "summary": "Rota para adicionar novos acessos",
         "requestBody": {
           "required": true,
           "content": {
@@ -111,12 +78,46 @@
     
     #// ---------------------------------------------------------------
 
+     "/user/login" : {
+      "post": {
+         "tags": ["Usuários"],
+        "summary": "Endpoint de login ",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": { "type": "string" },
+                  "pass": { "type": "string" }
+                },
+                "required": ["user", "pass"]
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Login bem-sucedido. Retorna uma chave JWT de autenticação, que será usada para identificar o usuário de forma autorizada nas demais operações. Essa chave é essencial para processos como troca de senha, criação de novas postagens e outras ações que envolvem inserções no banco de dados."
+           },
+          "401": {
+            "description": "Falha na autenticação"
+          }
+        }
+
+      }
+    } ,
+
+    #// ---------------------------------------------------------------
+
     "/user/update/selfPerfil" : {
 
       "patch": {
          "tags": ["Usuários"],
-         "description" : "Será possivel editar apenas os campos :   sexo , email , telefone e funcao_na_empresa" ,
-        "summary": "Atualizar dados de perfil do usuário",
+          "description": "Permite a edição dos campos: sexo, email, telefone e função na empresa. Esta rota requer um token JWT válido, e as alterações serão aplicadas apenas ao usuário vinculado ao token fornecido.",
+          "summary": "Atualizar dados de perfil do usuário ",
         #// -------------- AUTH
         "security": [
           {
@@ -143,7 +144,7 @@
 
         "responses": {
           "200": {
-            "description": "Acesso criado com sucesso"
+            "description": "Confirma execução realizada com sucesso"
           },
           "401": {
             "description": "Erro na execução do processo"
@@ -159,8 +160,9 @@
 
       "patch": {
          "tags": ["Usuários"],
-         "description" : "Troca de senha" ,
-        "summary": "Rota possibilita o proprio usuário editar sua senha",
+         "summary": "Mudar senha de acesso do usuário autenticado",
+         "description": "Permite a edição dos campos: sexo, email, telefone e função na empresa. Esta rota requer um token JWT válido, e as alterações serão aplicadas apenas ao usuário vinculado ao token fornecido.",
+
         #// -------------- AUTH
         "security": [
           {
@@ -201,7 +203,8 @@
     "/user/list/self": {
       "get": {
         "tags": ["Usuários"],
-        "summary": "Listar dados do usuário autenticado",
+        "summary": "Mudar senha de acesso",
+        "description" : "Rota responsável por permitir que o usuário autenticado, por meio do token JWT, altere sua senha com segurança." ,
         "security": [
           {
             "bearerAuth": []
@@ -226,7 +229,8 @@
     "/user/add/newPostComentario": {
       "post": {
         "tags": ["Usuários"],
-        "summary": "Para o usuário adicionar novos postes",
+        "summary": "Adicionar novos postagens sem vincular a arquivos",
+        "description": "Permite que o usuário autenticado crie novas postagens sem arquivos. As postagens são associadas automaticamente ao usuário do token JWT.",
         "security": [
           {
             "bearerAuth": []
@@ -243,7 +247,7 @@
 
                   "legenda": { 
                     "type": "string",
-                    "description": "Texto da legenda"
+                    "description": "Texto da legenda "
                   }
 
                 },
@@ -255,7 +259,7 @@
 
         "responses": {
           "200": {
-            "description": "Postagem criada com sucesso"
+            "description": "Postagem criada com sucesso retorna ID da postagem"
           },
           "400": {
             "description": "Requisição malformada ou campos ausentes"
@@ -269,11 +273,12 @@
 
     #// ---------------------------------------------------------------
 
-
     "/user/add/newPostFile": {
       "post": {
         "tags": ["Usuários"],
-        "summary": "Para o usuário adicionar novos postes com arquivos",
+
+        "summary": "Adicionar novos postagens adicionando algum arquivos",
+        "description": "Permite que o usuário autenticado crie novas postagens com algum arquivos de sua preferência. As postagens são associadas automaticamente ao usuário do token JWT.",
         "security": [
           {
             "bearerAuth": []
@@ -311,7 +316,7 @@
 
         "responses": {
           "200": {
-            "description": "Postagem criada com sucesso"
+            "description": "Postagem criada com sucesso retorna ID da postagem"
           },
           "400": {
             "description": "Requisição malformada ou campos ausentes"
@@ -323,13 +328,13 @@
       }
     },
 
-
     #// ---------------------------------------------------------------
 
     "/postes/view/all": {
       "get": {
         "tags": ["Postagens"],
         "summary": "ver todas as postagens",
+        "description":"Rota que retorna todos os postes cadastradas",
         
         "security": [
           {
@@ -338,7 +343,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Postagem criada com sucesso"
+            "description": "Retorna todas as postagens cadastradas no sistema , memos informações de arquivos caso ele tenha"
           },
           "400": {
             "description": "Requisição malformada ou campos ausentes"
@@ -355,7 +360,8 @@
     "/postes/view/limit": {
       "get": {
         "tags": ["Postagens"],
-        "summary": "Lista todas postagens do usuário com limite",
+        "summary": "Ver postagens dos usuários limitadas",
+        "description": "Retorna o número máximo de postagens, sempre exibindo da mais recente para a mais antiga.",
         "security": [
           {
             "bearerAuth": []
@@ -376,7 +382,7 @@
 
         "responses": {
           "200": {
-            "description": "Lista de postagens retornada com sucesso"
+            "description": "Lista de postagens retornada com sucesso a quantidade solicitada"
           },
           "401": {
             "description": "Token inválido ou ausente"
@@ -393,7 +399,8 @@
     "/usuarios/list/onlyUsers": {
       "get": {
         "tags": ["Usuários"],
-        "summary": "Lista todas postagens do usuário com limite",
+        "summary": "Dados de cadastro",
+        "description": "Retorna as informações de cadastro do usuário vinculado ao token JWT utilizado na autenticação.",
 
         "security": [
           {
@@ -415,7 +422,7 @@
 
         "responses": {
           "200": {
-            "description": "Lista de postagens retornada com sucesso"
+            "description": "Lista informaçõs de nome , telefone , email , sexo  e função na empresa "
           },
           "401": {
             "description": "Token inválido ou ausente"
@@ -434,6 +441,8 @@
   "get": {
     "tags": ["Postagens"],
     "summary": "Download do arquivo da postagem",
+    "description": "Verifica a existência da postagem e do arquivo vinculado no servidor. Se válido, retorna o link público para acesso ao arquivo.",
+
     "security": [
       {
         "bearerAuth": []
