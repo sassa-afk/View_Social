@@ -205,20 +205,19 @@ O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para P
 Configure variáveis de ambiente para conexão com o banco Postgres.
 
 
-	1. Clone o repositório via terminal :
+1. Clone o repositório via terminal :
 
 	   git clone https://github.com/seu-usuario/seu-projeto.git
 	   cd seu-projeto
 	
-	2. Em seguida instale o postgreas e gerenciador psql via terminal: 
+2. Em seguida instale o postgreas e gerenciador psql via terminal: 
 	
-
 	   sudo apt update
 	   sudo apt install postgresql postgresql-client
 	   sudo systemctl start postgresql
 	   sudo systemctl enable postgresql
 	   
-	2. Para sistemas operacionais windonw Vá para o site oficial:
+2. Para sistemas operacionais windonw vá para o site oficial:
 	   https://www.postgresql.org/download/windows/
 	   - Baixe o instalador do PostgreSQL (você pode usar o instalador do StackBuilder).
 	   - Durante a instalação:
@@ -226,15 +225,14 @@ Configure variáveis de ambiente para conexão com o banco Postgres.
 	   - Defina a senha do usuário postgres
 	   - Instale o pgAdmin se quiser usar uma interface gráfica
 		
-	3. Em seguida seu banco pelo psql pelo terminal 
+3. Em seguida seu banco pelo psql pelo terminal 
 
 	  sudo -u postgres createuser --interactive
 	  sudo -u postgres createdb comunidade_1
 
-	  
-       4. Apos acessar seu banco postgres crie as tabelas conforme sqls dispiniveis em [Banco de Dados](#banco-de-dados) 
+4. Apos acessar seu banco postgres crie as tabelas conforme sqls dispiniveis em [Banco de Dados](#banco-de-dados) 
        
-       5. Por fim se for no linux acesse apasta public , e atraves do php nativo starte o index do php e no windonws incie no xamp ou outro sistema de execução do PHP
+5. Por fim se for no linux acesse apasta public , e atraves do php nativo starte o index do php e no windonws incie no xamp ou outro sistema de execução do PHP
        
 	   ```bash 
 	   cd public
