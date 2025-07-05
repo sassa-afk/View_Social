@@ -205,18 +205,18 @@ Configure variáveis de ambiente para conexão com o banco Postgres.
 
 
 	1. Clone o repositório via terminal :
----
+
 	   git clone https://github.com/seu-usuario/seu-projeto.git
 	   cd seu-projeto
----	
+	
 	2. Em seguida instale o postgreas e gerenciador psql via terminal: 
 	
----
+
 	   sudo apt update
 	   sudo apt install postgresql postgresql-client
 	   sudo systemctl start postgresql
 	   sudo systemctl enable postgresql
----	   
+	   
 	2. Para sistemas operacionais windonw Vá para o site oficial:
 	   https://www.postgresql.org/download/windows/
 	   - Baixe o instalador do PostgreSQL (você pode usar o instalador do StackBuilder).
@@ -226,10 +226,10 @@ Configure variáveis de ambiente para conexão com o banco Postgres.
 	   - Instale o pgAdmin se quiser usar uma interface gráfica
 		
 	3. Em seguida seu banco pelo psql pelo terminal 
----
+
 	  sudo -u postgres createuser --interactive
 	  sudo -u postgres createdb comunidade_1
----
+
 	  
        4. Apos acessar seu banco postgres crie as tabelas conforme sqls dispiniveis em [Banco de Dados](#banco-de-dados) 
        
@@ -240,7 +240,7 @@ Configure variáveis de ambiente para conexão com o banco Postgres.
 	   php -S localhost:8080
  	   
 
-Configure variáveis de ambiente para conexão com o banco Postgres.
+Configure variáveis de ambiente para conexão com o banco Postgres no render.
 Exemplo .env:
 ---
 	DB_NAME=seubanco
