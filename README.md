@@ -234,7 +234,6 @@ Configure variáveis de ambiente para conexão com o banco Postgres.
        
 5. Por fim se for no linux acesse apasta public , e atraves do php nativo starte o index do php e no windonws incie no xamp ou outro sistema de execução do PHP
        
-	   ```bash 
 	   cd public
 	   php -S localhost:8080
  	   
@@ -254,7 +253,7 @@ Exemplo .env:
 As Variáveis sensíveis deste projetos (como credenciais do banco) serão criadas e acessadas por `getenv()` e definidas como variáveis de ambiente no servidor RENDER onde o projeto será alocado . 
 
 
-## Variáveis de Ambiente
+## Variáveis de Ambiente RENDER
 
 | Variável    | Descrição                     |
 | ----------- | ----------------------------- |
