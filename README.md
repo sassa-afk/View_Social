@@ -203,7 +203,7 @@ O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para P
 
 Configure variáveis de ambiente para conexão com o banco Postgres.
 
----
+
 	1. Clone o repositório via terminal :
 	   ```bash
 	   git clone https://github.com/seu-usuario/seu-projeto.git
@@ -236,7 +236,7 @@ Configure variáveis de ambiente para conexão com o banco Postgres.
 	   ```bash 
 	   cd public
 	   php -S localhost:8080
----	   
+ 	   
 
 Configure variáveis de ambiente para conexão com o banco Postgres.
 Exemplo .env:
