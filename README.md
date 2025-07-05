@@ -198,6 +198,7 @@ O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para P
 
 ## Diagrama de classe
 ---
+---
 
 ## Configuração do Ambiente (Linux)
 
