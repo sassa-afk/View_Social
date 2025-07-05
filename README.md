@@ -61,6 +61,7 @@ Além disso:
 
 - [Tecnologias](#tecnologias)  
 - [Estrutura do Projeto](#estrutura-do-projeto)  
+- [Segurança (Autenticação JWT e HASH de senhas)](#segurança-autenticação-jwt-e-hash-de-senhas)
 - [Diagrama de classe](#diagrama-de-classe)  
 - [Configuração do Ambiente](#configuração-do-ambiente)  
 - [Variáveis de Ambiente](#variáveis-de-ambiente)  
@@ -188,13 +189,14 @@ O projeto está organizado em camadas seguindo uma estrutura MVC adaptada para P
 - Em ambiente como Render (plano gratuito), o armazenamento é temporário – a pasta pode ser apagada após reinício da instância.
 
 
-**Segurança (detalhado)**
+## Segurança ( Autenticação JWT e HASH de senhas )
 
-- A autenticação é feita via tokens JWT, obrigatórios para a maioria dos endpoints.
-- O token deve ser enviado no header `Authorization: Bearer {token}`.
-- Endpoints protegidos estão definidos principalmente em `RotasJWT.php`.
-
-
+- Segurança (Autenticação JWT e Hash de Senhas)
+A autenticação é realizada por meio de tokens JWT, exigidos na maioria dos endpoints da API.
+- O token deve ser enviado no cabeçalho HTTP como: Authorization: Bearer {token}.
+- As rotas protegidas estão principalmente definidas no arquivo RotasJWT.php.
+- Após a autenticação, é gerado um token JWT contendo o ID do usuário validado. Esse token é obrigatório em requisições que envolvem inserção, edição ou consulta de dados sensíveis no banco, garantindo que apenas usuários autorizados executem essas ações.
+- Senhas são armazenadas utilizando criptografia via hash. A codificação é aplicada apenas nos processos de cadastro, autenticação e redefinição de senha, assegurando que os dados sensíveis não sejam expostos em nenhum momento.
 
 ## Diagrama de classe
 ---
